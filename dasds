@@ -1,0 +1,23 @@
+[33mcommit 2d0f07b2ae6e83d5d987febac846b1b4770e806c[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Rei Ishinabe <rishinabe@gmail.com>
+Date:   Mon May 27 16:12:36 2019 +0900
+
+    added appointment model
+
+[33mcommit aebc8f7e788c40e5cc1f536dfc6286e851236d79[m
+Author: Rei Ishinabe <rishinabe@gmail.com>
+Date:   Mon May 27 16:06:10 2019 +0900
+
+    added doctor model
+
+[33mcommit 8dcf653df626ff13a2531a826e11307fb336eeb7[m
+Author: Rei Ishinabe <rishinabe@gmail.com>
+Date:   Mon May 27 15:59:24 2019 +0900
+
+    added user model
+
+[33mcommit 2a568b9c9a0f42a9c5565a82d3fbe6cfcbac9734[m
+Author: Rei Ishinabe <rishinabe@gmail.com>
+Date:   Mon May 27 15:31:09 2019 +0900
+
+    Initial commit with minimal template from https://github.com/lewagon/rails-templates
