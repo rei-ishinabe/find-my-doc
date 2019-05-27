@@ -1,5 +1,5 @@
 class Doctor < ApplicationRecord
-  has_many :appointments
+  has_many :appointments, dependent: :destroy
 
   SPECIALITIES = ["dentist", "general practicioner", "allergist", "cardilogist", "dermatologist", "gastroenterologist", "hematologist", "internist", "neurologist", "oncologist", "ophthalmologist", "osteopath", "otolaryngologist", "pediatrician", "plastic surgeon", "podiatrist", "psychiatrist", "pulmonologist", "rheumatologist", "surgeon", "urologist", "other"]
 
@@ -8,6 +8,7 @@ class Doctor < ApplicationRecord
   validates :speciality, presence: true, inclusion: { in: SPECIALITIES }
   validates :address, presence: true
   validates :gender, presence: true, inclusion: { in: ["male", "female"] }
+  validates :email, presence: true, uniqueness: true
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
