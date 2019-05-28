@@ -10,6 +10,8 @@ class Doctor < ApplicationRecord
   validates :gender, presence: true, inclusion: { in: ["male", "female"] }
   validates :email, presence: true, uniqueness: true
 
+  mount_uploader :photo, PhotoUploader
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
