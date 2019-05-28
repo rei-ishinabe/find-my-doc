@@ -1,2 +1,15 @@
-<h1>Doctors#show</h1>
-<p>Find me in app/views/doctors/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col12">
+    <p><%= @doctor.first_name %> <%= @doctor.last_name %></p>
+    <p><%= @doctor.email %></p>
+    <p><%= @doctor.phone_number %></p>
+    <p><%= @doctor.speciality %></p>
+    <p><%= @doctor.gender %></p>
+    <p><%= @doctor.opening_hour %></p>
+    <p><%= @doctor.closing_hour %></p>
+    </div>
+  </div>
+  <button class="btn btn-primary">Reserve</button>
+</div>
+
