@@ -31,9 +31,10 @@ end
 puts "creating doctors"
 
 2.times do
+  url = "https://loremflickr.com/640/480/doctor"
   first_name = Faker::Name.male_first_name
   last_name = Faker::Name.last_name
-  Doctor.create!(
+  doctor = Doctor.new(
     first_name: first_name,
     last_name: last_name,
     email: Faker::Internet.email(first_name),
@@ -43,14 +44,17 @@ puts "creating doctors"
     address: Faker::Address.full_address,
     gender: "male",
     opening_hour: rand(7..10),
-    closing_hour: rand(16..19)
+    closing_hour: rand(16..19),
   )
+  doctor.remote_photo_url = url
+  doctor.save!
 end
 
 2.times do
+  url = "https://loremflickr.com/640/480/woman"
   first_name = Faker::Name.female_first_name
   last_name = Faker::Name.last_name
-  Doctor.create!(
+  doctor = Doctor.new(
     first_name: first_name,
     last_name: last_name,
     email: Faker::Internet.email(first_name),
@@ -60,8 +64,10 @@ end
     address: Faker::Address.full_address,
     gender: "female",
     opening_hour: rand(7..10),
-    closing_hour: rand(16..19)
+    closing_hour: rand(16..19),
   )
+  doctor.remote_photo_url = url
+  doctor.save!
 end
 
 puts "creating appointments"
