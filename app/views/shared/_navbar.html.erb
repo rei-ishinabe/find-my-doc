@@ -7,7 +7,6 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  <% if current_user != @user %>
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
           <%= link_to "Logout", destroy_doctor_session_path, method: :delete, class: "nav-link" %>
