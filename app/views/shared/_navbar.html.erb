@@ -9,7 +9,9 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
-          <%= link_to "Logout", destroy_doctor_session_path, method: :delete, class: "nav-link" %>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
+      <% elsif doctor_signed_in? %>
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %>
       <% else  %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
