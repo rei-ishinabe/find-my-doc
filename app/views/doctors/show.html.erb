@@ -1,15 +1,23 @@
 <div class="container">
   <div class="row">
     <div class="col12">
-    <p><%= @doctor.first_name %> <%= @doctor.last_name %></p>
-    <p><%= @doctor.email %></p>
-    <p><%= @doctor.phone_number %></p>
-    <p><%= @doctor.speciality %></p>
-    <p><%= @doctor.gender %></p>
-    <p><%= @doctor.opening_hour %></p>
-    <p><%= @doctor.closing_hour %></p>
+      <div class="card mb-3 mt-5">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="<%= @doctor.photo %>" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title"><%= @doctor.first_name %> <%= @doctor.last_name %></h5>
+                <p class="card-text"><small class="text-muted"><%= @doctor.speciality %></small></p>
+                <p class="card-text"><%= @doctor.email %></p>
+                <p class="card-text"><%= @doctor.phone_number %></p>
+                <button class="btn btn-primary">Book an appointment</button>
+              </div>
+            </div>
+          </div>
+      </div>
     </div>
   </div>
-  <button class="btn btn-primary">Reserve</button>
 </div>
 

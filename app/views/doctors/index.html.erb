@@ -4,7 +4,7 @@
   <%  @doctors.each do |doctor| %>
   <div class="row">
       <div class="col-3 left">
-        <img class="thumbnail_doc" src="//s3-eu-west-1.amazonaws.com/znamylekar.cz/doctor/560244/56024472e2a7db7007529b199c854429_220_square.jpg">
+        <img class="thumbnail_doc" src="<%= doctor.photo %>">
       </div>
       <div class="col-9">
         <div class="media-body">
