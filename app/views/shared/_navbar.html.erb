@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light navbar-lewagon">
+<nav class="navbar navbar-expand-lg navbar-light navbar-lewagon fixed-top">
   <%= link_to root_path, class: "navbar-brand" do %>
     <%= image_tag "logo.png" %>
   <% end %>
@@ -7,10 +7,8 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <% if current_user != @user %>
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <!-- <a class="nav-link" href="#">FAQ<span class="sr-only">(current)</span></a> -->
-      </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Sign Up
@@ -23,6 +21,7 @@
       <li class="nav-item">
         <%= link_to "Login", new_user_session_path, class: "nav-link" %>
       </li>
+  <% end %>
     </ul>
   </div>
 </nav>
