@@ -1,4 +1,5 @@
-<h1></h1>
+<p></p>
+<p></p>
 <div class="container">
   <%  @doctors.each do |doctor| %>
   <div class="row">
@@ -7,7 +8,7 @@
       </div>
       <div class="col-9">
         <div class="media-body">
-          <a href=""><h5 class="mt-0"><%= doctor.first_name %> <%= doctor.last_name %></h5></a>
+          <h5 class="mt-0"><%= link_to "#{doctor.first_name} #{doctor.last_name}" , doctor_path(doctor)  %></h5>
           <p><%= doctor.address %></p>
           <p><%= doctor.phone_number %></p>
           <p><%= doctor.email %></p>
