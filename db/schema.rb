@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_27_071009) do
+ActiveRecord::Schema.define(version: 2019_05_27_085101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2019_05_27_071009) do
     t.string "phone_number"
     t.string "picture_url"
     t.string "gender"
-    t.float "oppening_hour"
+    t.float "opening_hour"
     t.float "closing_hour"
     t.boolean "is_approved", default: false
     t.float "latitude"
