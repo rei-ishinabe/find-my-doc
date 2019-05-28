@@ -74,7 +74,7 @@ puts "creating appointments"
 
 10.times do
   appointment = Appointment.new(
-    date: Faker::Date.forward(14),
+    date: Faker::Time.between(DateTime.now, DateTime.now+10),
     is_confirmed: [true, false].sample
   )
   appointment.user = User.find(rand(User.first.id..User.last.id))
