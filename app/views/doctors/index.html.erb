@@ -1,2 +1,18 @@
-<h1>Doctors#index</h1>
-<p>Find me in app/views/doctors/index.html.erb</p>
+<h1></h1>
+<div class="container">
+  <%  @doctors.each do |doctor| %>
+  <div class="row">
+      <div class="col-3 left">
+        <img class="thumbnail_doc" src="//s3-eu-west-1.amazonaws.com/znamylekar.cz/doctor/560244/56024472e2a7db7007529b199c854429_220_square.jpg">
+      </div>
+      <div class="col-9">
+        <div class="media-body">
+          <a href=""><h5 class="mt-0"><%= doctor.first_name %> <%= doctor.last_name %></h5></a>
+          <p><%= doctor.address %></p>
+          <p><%= doctor.phone_number %></p>
+          <p><%= doctor.email %></p>
+        </div>
+      </div>
+  </div>
+  <% end %>
+</div>
