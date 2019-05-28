@@ -11,8 +11,8 @@
   <body>
     <div class="d-flex justify-content-between flex-column">
       <%= render 'shared/navbar' %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <p class="notice d-none"><%= notice %></p>
+      <p class="alert d-none"><%= alert %></p>
       <div class="flex-grow-1 mt-5" style="min-height: 87vh">
         <%= yield %>
       </div>
