@@ -4,4 +4,11 @@ class AppointmentPolicy < ApplicationPolicy
       scope.where(user: user)
     end
   end
+    def create?
+      true
+    end
+
+    def new?
+      true
+    end
 end

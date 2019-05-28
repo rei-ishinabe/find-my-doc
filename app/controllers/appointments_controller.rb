@@ -1,14 +1,26 @@
 class AppointmentsController < ApplicationController
   def index
-    # @appointments = Appointment.all
+    @appointments = Appointment.all
     @appointments = policy_scope(Appointment)
   end
 
+  def new
+    @doctor = Doctor.find(params[:doctor_id])
+    @appointments = Appointment.where(doctor: @doctor)
+    @appointment = Appointment.new
+    authorize @appointment
+  end
+
   def create
+    @doctor = Doctor.find(params[:doctor_id])
     @appointment = Appointment.new(appointment_params)
-    if @appoinement.save
+    authorize @appointment
+    @appointment.doctor = @doctor
+    @appointment.user = current_user
+    if @appointment.save
       redirect_to appointments_path
     else
+      @appointments = Appointment.where(doctor: @doctor)
       render :new
     end
   end
@@ -22,6 +34,6 @@ class AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.require(:appoinement).permit(:date, :is_confirmed)
+    params.require(:appointment).permit(:user_id, :doctor_id, :date, :is_confirmed)
   end
 end
