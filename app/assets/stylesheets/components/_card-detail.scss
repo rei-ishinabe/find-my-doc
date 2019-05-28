@@ -1,0 +1,16 @@
+.card-detail {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  border-radius: 8px;
+}
+
+
+
+.card-detail img {
+  height: 100%;
+  object-fit: cover;
+}

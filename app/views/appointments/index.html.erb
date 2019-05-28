@@ -4,7 +4,7 @@
       <div class="col-12">
         <h1>Appointments List:</h1>
         <% @appointments.each do |appointment| %>
-          <h3><%= appointment.doctor.first_name %> <%= appointment.doctor.last_name %> </h3>
+          <h3><%= appointment.doctor.full_name %> </h3>
           <li><%= appointment.date.strftime("%b %e, %l:%M %p") %></li>
           <li><%= appointment.doctor.address %></li>
           <br>
