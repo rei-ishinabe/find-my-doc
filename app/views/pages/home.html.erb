@@ -4,7 +4,7 @@
     <p>Search among <%= Doctor.count %> doctors</p>
     <div class="row">
       <div class="col-12 align-self-center">
-        <form action="">
+        <%= form_tag(doctors_path, method: :get) do %>
           <div class="row mb-3">
             <div class="col-12 col-md-9">
               <div class="row">
@@ -17,8 +17,9 @@
               </div>
             </div>
             <div class="col-12 col-md-3 mb-3">
-              <button type="button" class="btn btn-primary btn-lg btn-block search-button"> Search </button>
+              <%= submit_tag ("Search"), class: "btn btn-primary btn-lg btn-block search-button" %>
             </div>
+            <% end %>
           </div>
         </form>
       </div>
@@ -45,3 +46,7 @@
     </div>
   </div>
 </div>
+
+
+
+
