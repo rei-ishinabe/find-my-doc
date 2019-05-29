@@ -4,11 +4,36 @@
       <h3>Make a new appointment with Dr. <%= @doctor.full_name %></h3>
       <p>Opening hours: <%= @doctor.opening_hours %></p>
       <%= simple_form_for [@doctor, @appointment] do |f| %>
-        <div class="form-group mt-3">
-          <%= f.datetime_select :date, class:'form-control' %>
-        </div>
-          <%= f.submit 'Make an appointment', class: 'btn btn-primary mt-3' %>
+      <div class="form-group mt-3">
+        <%= f.datetime_select :date, class:'form-control' %>
+      </div>
+      <%= f.submit 'Make an appointment', class:'btn btn-primary mt-3' %>
       <% end %>
     </div>
   </div>
+  <% sp =@time.split("-") %>
+  <% x = sp[0].split(":") %>
+  <script>
+    var d = new Date();
+    var month = new Array();
+    month[1] = "January";
+    month[2] = "February";
+    month[3] = "March";
+    month[4] = "April";
+    month[5] = "May";
+    month[6] = "June";
+    month[7] = "July";
+    month[8] = "August";
+    month[9] = "September";
+    month[10] = "October";
+    month[11] = "November";
+    month[12] = "December";
+    var n = month[<%= sp[2] %>];
+    document.getElementById("appointment_date_4i").innerHTML ="<option>"+<%= x[0]  %>+"</option>"
+    document.getElementById("appointment_date_5i").innerHTML ="<option>"+<%= x[1]  %>+"</option>"
+    document.getElementById("appointment_date_1i").innerHTML ="<option>"+<%= sp[1]  %>+"</option>"
+
+    document.getElementById("appointment_date_3i").innerHTML ="<option>"+<%= sp[3]  %>+"</option>"
+  </script>
 </div>
+
