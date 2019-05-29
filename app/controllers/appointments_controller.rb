@@ -9,6 +9,7 @@ class AppointmentsController < ApplicationController
     @appointments = Appointment.where(doctor: @doctor)
     @appointment = Appointment.new
     authorize @appointment
+    @time = params[:format]
   end
 
   def create
