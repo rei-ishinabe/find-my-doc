@@ -1,23 +1,13 @@
-<!-- <div class="container">
+<div class="container-fluid card mt-5 p-5">
   <div class="row">
     <div class="col-12">
-      <% @appointments.each do |appointment| %>
-        <p><%= appointment.date %> </p>
-        <p><%= appointment.user.first_name %> | <%= appointment.user.last_name %> </p>
-      <% end %>
-    </div>
-  </div>
-</div> -->
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-12">
-      <h2>Make a new appointment with Dr. <%= @doctor.full_name %></h2>
+      <h3>Make a new appointment with Dr. <%= @doctor.full_name %></h3>
       <p>Opening hours: <%= @doctor.opening_hours %></p>
       <%= simple_form_for [@doctor, @appointment] do |f| %>
         <div class="form-group mt-3">
           <%= f.datetime_select :date, class:'form-control' %>
         </div>
-          <%= f.submit 'Make an appointment', class:'btn btn-primary mt-3' %>
+          <%= f.submit 'Make an appointment', class: 'btn btn-primary mt-3' %>
       <% end %>
     </div>
   </div>
