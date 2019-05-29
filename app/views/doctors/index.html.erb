@@ -5,11 +5,11 @@
     <div class="card-product">
       <img src="<%= doctor.photo %>">
       <div class="card-product-infos">
-        <h2><%= link_to "#{doctor.first_name} #{doctor.last_name} - #{doctor.speciality.capitalize}" , doctor_path(doctor)  %></h2>
-        <p><%= doctor.address %></p>
-        <p><%= doctor.phone_number %></p>
-        <p><%= doctor.email %></p>
-        <p><%= doctor.opening_hour.to_i %>:00 - <%= doctor.closing_hour.to_i %>:00</p>
+        <h2><%= link_to "#{doctor.full_name} - #{doctor.speciality.capitalize}" , doctor_path(doctor)  %></h2>
+        <p><i class="fas fa-map-marked-alt"></i> <%= doctor.address %></p>
+        <p><i class="fas fa-phone"></i> <%= doctor.phone_number %></p>
+        <p><i class="fas fa-envelope"></i> <%= doctor.email %></p>
+        <p><i class="fas fa-calendar-alt"></i> <%= doctor.opening_hours %></p>
       </div>
     </div>
   <% end %>
