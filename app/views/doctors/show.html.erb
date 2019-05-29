@@ -8,14 +8,16 @@
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title"><%= @doctor.full_name %></h5>
-                <p class="card-text"><small class="text-muted"><%= @doctor.speciality %></small></p>
-                <p class="card-text"><i class="fas fa-envelope"></i> <%= @doctor.email %></p>
+                <h4 class="card-title mb-1"><%= @doctor.full_name %></h4>
+                <h5 class="card-text mb-3"><small class="text-muted"><%= @doctor.speciality %></small></h5>
+                <p class="card-text"><i class="fas fa-envelope"></i> <%=  @doctor.email %></p>
                 <p class="card-text"><i class="fas fa-phone"></i> <%= @doctor.phone_number %></p>
-                <button class="btn btn-primary"><%= link_to "Book an appointment", new_doctor_appointment_path(@doctor) %></button>
+                <span><%= link_to "Book an appointment", new_doctor_appointment_path(@doctor), class: "btn btn-outline-primary" %></span>
               </div>
             </div>
           </div>
+      </div>
+      <div><%= link_to "Home", doctors_path, class: "btn btn-outline-info" %>
       </div>
     </div>
   </div>
