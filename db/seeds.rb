@@ -39,6 +39,21 @@ end
 puts "creating doctors"
 
 doctor = Doctor.new(
+  first_name: 'Kosei',
+  last_name: 'Yano',
+  email: Faker::Internet.email('yano'),
+  password: "secret",
+  phone_number: '03-5962-7940',
+  speciality: "dentist",
+  address: '1-17-14, Shibuya, Shibuya-ku, Tokyo, Japan',
+  gender: "male",
+  opening_hour: rand(7..10),
+  closing_hour: rand(16..19),
+)
+doctor.remote_photo_url = "https://haplus.jp/en/imgs/shibuya/doctor/1.jpg"
+doctor.save!
+
+doctor = Doctor.new(
   first_name: 'Hanae',
   last_name: 'Morimura',
   email: Faker::Internet.email('morimura'),
