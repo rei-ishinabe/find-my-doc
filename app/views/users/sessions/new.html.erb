@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container m-5 p-5">
   <div class="wrapper">
     <div class="row">
       <div class="col-12">
@@ -8,14 +8,15 @@
               <%= f.input :email,
                           required: false,
                           autofocus: true,
-                          input_html: { autocomplete: "email" } %>
+                          input_html: { autocomplete: "email" },
+                          placeholder: "username@gmail.com" %>
               <%= f.input :password,
                           required: false,
                           input_html: { autocomplete: "current-password" } %>
               <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
             </div>
             <div class="form-actions">
-              <%= f.button :submit, "Log in", class: "btn btn-success mb-2" %>
+              <%= f.button :submit, "Log in", class: "btn btn-success mb-3" %>
             </div>
           <% end %>
           <%= render "users/shared/links" %>
