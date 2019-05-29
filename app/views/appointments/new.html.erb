@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
   <div class="row">
     <div class="col-12">
       <% @appointments.each do |appointment| %>
@@ -7,13 +7,17 @@
       <% end %>
     </div>
   </div>
-</div>
-<div class="container">
+</div> -->
+<div class="container mt-5">
   <div class="row">
     <div class="col-12">
+      <h2>Make a new appointment with Dr. <%= @doctor.full_name %></h2>
+      <p>Opening hours: <%= @doctor.opening_hours %></p>
       <%= simple_form_for [@doctor, @appointment] do |f| %>
-        <%= f.datetime_select  :date  %>
-        <%= f.submit %>
+        <div class="form-group mt-3">
+          <%= f.datetime_select :date, class:'form-control' %>
+        </div>
+          <%= f.submit 'Make an appointment', class:'btn btn-primary mt-3' %>
       <% end %>
     </div>
   </div>
