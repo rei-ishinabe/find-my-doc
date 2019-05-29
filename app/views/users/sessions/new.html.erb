@@ -1,4 +1,4 @@
-<div class="container m-5 p-5">
+<div class="container mt-4">
   <div class="wrapper">
     <div class="row">
       <div class="col-12">
@@ -16,7 +16,7 @@
               <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
             </div>
             <div class="form-actions">
-              <%= f.button :submit, "Log in", class: "btn btn-success mb-3" %>
+              <%= f.button :submit, "Log in", class: "btn btn-primary mb-2" %>
             </div>
           <% end %>
           <%= render "users/shared/links" %>
