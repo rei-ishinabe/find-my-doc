@@ -2,22 +2,62 @@
   <div class="row justify-content-center">
     <div class="col-12 ">
       <div class="card-detail mb-3 mt-5">
-          <div class="row no-gutters">
-            <div class="col-md-4">
-              <img src="<%= @doctor.photo %>" class="card-img" alt="...">
-            </div>
-            <div class="col-md-8">
-              <div class="card-body">
-                <h5 class="card-title"><%= @doctor.full_name %></h5>
-                <p class="card-text"><small class="text-muted"><%= @doctor.speciality %></small></p>
-                <p class="card-text"><i class="fas fa-envelope"></i> <%= @doctor.email %></p>
-                <p class="card-text"><i class="fas fa-phone"></i> <%= @doctor.phone_number %></p>
-                <button class="btn btn-primary"><%= link_to "Book an appointment", new_doctor_appointment_path(@doctor) %></button>
-              </div>
+        <div class="row no-gutters">
+          <div class="col-md-4">
+            <img src="<%= @doctor.photo %>" class="card-img" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%= @doctor.full_name %></h5>
+              <p class="card-text"><small class="text-muted"><%= @doctor.speciality %></small></p>
+              <p class="card-text"><i class="fas fa-envelope"></i> <%= @doctor.email %></p>
+              <p class="card-text"><i class="fas fa-phone"></i> <%= @doctor.phone_number %></p>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<div class="card" style="width: 27rem;">
+  <h5>Available times</h5>
+  <div class="d-flex justify-content-center">
+    <div class="card" style="width: 9rem;">
+      <div class="card-header">
+        Today
+      </div>
+      <ul class="list-group list-group-flush">
+        <% time = @doctor.opening_hour %>
+        <% until time == @doctor.closing_hour || time == @doctor.opening_hour + 3 %>
+        <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor) %></li>
+        <% time += 0.5 %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="card" style="width: 9rem;">
+      <div class="card-header">
+        Tomorrow
+      </div>
+      <ul class="list-group list-group-flush">
+        <% time = @doctor.opening_hour %>
+        <% until time == @doctor.closing_hour || time == @doctor.opening_hour + 3 %>
+        <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor) %></li>
+        <% time += 0.5 %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="card" style="width: 9rem;">
+      <div class="card-header">
+        <%= (Date.today + 2).strftime("%A") %>
+      </div>
+      <ul class="list-group list-group-flush">
+        <% time = @doctor.opening_hour %>
+        <% until time == @doctor.closing_hour || time == @doctor.opening_hour + 3 %>
+        <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor) %></li>
+        <% time += 0.5 %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
