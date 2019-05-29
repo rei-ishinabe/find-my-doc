@@ -12,7 +12,7 @@
                 <p class="card-text"><small class="text-muted"><%= @doctor.speciality %></small></p>
                 <p class="card-text"><%= @doctor.email %></p>
                 <p class="card-text"><%= @doctor.phone_number %></p>
-                <button class="btn btn-primary">Book an appointment</button>
+                <button class="btn btn-primary"><%= link_to "Book an appointment", new_doctor_appointment_path(@doctor) %></button>
               </div>
             </div>
           </div>
