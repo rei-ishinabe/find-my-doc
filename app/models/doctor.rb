@@ -11,6 +11,9 @@ class Doctor < ApplicationRecord
   validates :email, presence: true, uniqueness: true
 
   mount_uploader :photo, PhotoUploader
+  # for map
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
