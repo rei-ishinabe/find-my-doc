@@ -8,10 +8,10 @@
             </div>
             <div class="col-md-8">
               <div class="card-body">
-                <h5 class="card-title"><%= @doctor.first_name %> <%= @doctor.last_name %></h5>
+                <h5 class="card-title"><%= @doctor.full_name %></h5>
                 <p class="card-text"><small class="text-muted"><%= @doctor.speciality %></small></p>
-                <p class="card-text"><%= @doctor.email %></p>
-                <p class="card-text"><%= @doctor.phone_number %></p>
+                <p class="card-text"><i class="fas fa-envelope"></i> <%= @doctor.email %></p>
+                <p class="card-text"><i class="fas fa-phone"></i> <%= @doctor.phone_number %></p>
                 <button class="btn btn-primary"><%= link_to "Book an appointment", new_doctor_appointment_path(@doctor) %></button>
               </div>
             </div>

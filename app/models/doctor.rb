@@ -20,4 +20,14 @@ class Doctor < ApplicationRecord
   def full_name
     "#{first_name.capitalize} #{last_name.capitalize}"
   end
+
+  def float_to_hour(float)
+    min = (float * 60).to_i
+    hour, min = min.divmod(60)
+    "%02d:%02d" % [hour, min] # => "13:30:00"
+  end
+
+  def opening_hours
+    "#{float_to_hour(opening_hour)} - #{float_to_hour(closing_hour)}"
+  end
 end
