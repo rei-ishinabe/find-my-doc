@@ -16,6 +16,14 @@ Doctor.destroy_all
 
 puts "creating users"
 
+User.create!(
+    first_name: 'Paulo',
+    last_name: "D'Alberti",
+    email: 'paulo@dalberti.com',
+    password: "secret",
+    phone_number: Faker::Number.leading_zero_number(2) + Faker::Number.leading_zero_number(9)
+  )
+
 10.times do
   first_name = Faker::Name.first_name
   last_name = Faker::Name.last_name
@@ -27,14 +35,6 @@ puts "creating users"
     phone_number: Faker::Number.leading_zero_number(2) + Faker::Number.leading_zero_number(9)
   )
 end
-
-User.create!(
-    first_name: 'Paulo',
-    last_name: "D'Alberti",
-    email: 'paulo@dalberti.com',
-    password: "secret",
-    phone_number: Faker::Number.leading_zero_number(2) + Faker::Number.leading_zero_number(9)
-  )
 
 puts "creating doctors"
 
@@ -136,7 +136,7 @@ puts "creating appointments"
     is_confirmed: [true, false].sample
   )
   appointment.date = appointment.date.change(min: appointment.date.min < 30 ? 0 : 30)
-  appointment.user = User.find(rand(User.first.id..User.last.id))
+  appointment.user = User.find(rand(User.second.id..User.last.id))
   appointment.doctor = Doctor.find(rand(Doctor.first.id..Doctor.last.id))
 
   until ((1..5).include? appointment.date.wday) && ((appointment.doctor.opening_hour..appointment.doctor.closing_hour).include? appointment.date.hour)
