@@ -28,47 +28,105 @@ puts "creating users"
   )
 end
 
+User.create!(
+    first_name: 'Paulo',
+    last_name: "D'Alberti",
+    email: 'paulo@dalberti.com',
+    password: "secret",
+    phone_number: Faker::Number.leading_zero_number(2) + Faker::Number.leading_zero_number(9)
+  )
+
 puts "creating doctors"
 
-2.times do
-  url = "https://loremflickr.com/640/480/doctor"
-  first_name = Faker::Name.male_first_name
-  last_name = Faker::Name.last_name
-  doctor = Doctor.new(
-    first_name: first_name,
-    last_name: last_name,
-    email: Faker::Internet.email(first_name),
-    password: "secret",
-    phone_number: Faker::Number.leading_zero_number(2) + Faker::Number.leading_zero_number(9),
-    speciality: Doctor::SPECIALITIES.sample,
-    address: Faker::Address.full_address,
-    gender: "male",
-    opening_hour: rand(7..10),
-    closing_hour: rand(16..19),
-  )
-  doctor.remote_photo_url = url
-  doctor.save!
-end
+doctor = Doctor.new(
+  first_name: 'Hanae',
+  last_name: 'Morimura',
+  email: Faker::Internet.email('morimura'),
+  password: "secret",
+  phone_number: '03-3570-1234',
+  speciality: Doctor::SPECIALITIES.sample,
+  address: '3-8-31 Ariake, Koto-ku, Tokyo, Japan',
+  gender: "female",
+  opening_hour: rand(7..10),
+  closing_hour: rand(16..19),
+)
+doctor.remote_photo_url = "https://expatsguide.jp/wp/wp-content/uploads/cancer-institute-staff.jpg"
+doctor.save!
 
-2.times do
-  url = "https://loremflickr.com/640/480/woman"
-  first_name = Faker::Name.female_first_name
-  last_name = Faker::Name.last_name
-  doctor = Doctor.new(
-    first_name: first_name,
-    last_name: last_name,
-    email: Faker::Internet.email(first_name),
-    password: "secret",
-    phone_number: Faker::Number.leading_zero_number(2) + Faker::Number.leading_zero_number(9),
-    speciality: Doctor::SPECIALITIES.sample,
-    address: Faker::Address.full_address,
-    gender: "female",
-    opening_hour: rand(7..10),
-    closing_hour: rand(16..19),
-  )
-  doctor.remote_photo_url = url
-  doctor.save!
-end
+doctor = Doctor.new(
+  first_name: 'Ryo',
+  last_name: 'Honda',
+  email: Faker::Internet.email('honda'),
+  password: "secret",
+  phone_number: '03-3400-5678',
+  speciality: Doctor::SPECIALITIES.sample,
+  address: '4-1-22 Hiroo, Shibuya-ku, Tokyo, Japan',
+  gender: "male",
+  opening_hour: rand(7..10),
+  closing_hour: rand(16..19),
+)
+doctor.remote_photo_url = "https://www.sugihori.com/img/page/staff/hayashi.jpg"
+doctor.save!
+
+doctor = Doctor.new(
+  first_name: 'Keisuke',
+  last_name: 'Kitahara',
+  email: Faker::Internet.email('kitahara'),
+  password: "secret",
+  phone_number: '03-6312-1998',
+  speciality: Doctor::SPECIALITIES.sample,
+  address: '2-7-3 Tamagawa, Setagaya-ku, Tokyo, Japan',
+  gender: "male",
+  opening_hour: rand(7..10),
+  closing_hour: rand(16..19),
+)
+doctor.remote_photo_url = "https://expatsguide.jp/wp/wp-content/uploads/Active-Ageing-Practioners.jpg"
+doctor.save!
+
+doctor = Doctor.new(
+  first_name: 'Yoshiko',
+  last_name: 'Nakagawa',
+  email: Faker::Internet.email('ynakagawa'),
+  password: "secret",
+  phone_number: '03-3473-8242',
+  speciality: Doctor::SPECIALITIES.sample,
+  address: '5-6-8 Minami-azabu, Minato-ku, Tokyo, Japan',
+  gender: "female",
+  opening_hour: rand(7..10),
+  closing_hour: rand(16..19),
+)
+doctor.remote_photo_url = "https://expatsguide.jp/wp/wp-content/uploads/Active-aging-practitioners-2.jpg"
+doctor.save
+
+doctor = Doctor.new(
+  first_name: 'Taichi',
+  last_name: 'Yamakawa',
+  email: Faker::Internet.email('yamakawa'),
+  password: "secret",
+  phone_number: '080-5657-1254',
+  speciality: Doctor::SPECIALITIES.sample,
+  address: ' 1-4-1 Kasumigaseki, Chiyoda-ku, Tokyo, Japan',
+  gender: "male",
+  opening_hour: rand(7..10),
+  closing_hour: rand(16..19),
+)
+doctor.remote_photo_url = "https://expatsguide.jp/wp/wp-content/uploads/Counselling-Tokyo.jpg"
+doctor.save
+
+doctor = Doctor.new(
+  first_name: 'Ichiro',
+  last_name: 'Sanno',
+  email: Faker::Internet.email('ichiro_sanno'),
+  password: "secret",
+  phone_number: '03-3402-9987',
+  speciality: Doctor::SPECIALITIES.sample,
+  address: '8-10-16 Akasaka, Minato-ku, Tokyo, Japan',
+  gender: "male",
+  opening_hour: rand(7..10),
+  closing_hour: rand(16..19),
+)
+doctor.remote_photo_url = "http://www.fgh-carrot.com/images/dept/doctor/masataka_hoshino.jpg"
+doctor.save!
 
 puts "creating appointments"
 
