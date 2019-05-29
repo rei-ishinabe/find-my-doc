@@ -28,7 +28,7 @@
           </div>
           <ul class="list-group list-group-flush">
             <% time = (@doctor.opening_hour > DateTime.now.hour ? @doctor.opening_hour : DateTime.now.hour + 1) %>
-            <% until time == @doctor.closing_hour || time == @doctor.opening_hour + 3 %>
+            <% until time >= @doctor.closing_hour || time == @doctor.opening_hour + 3 %>
             <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor, "#{@doctor.float_to_hour(time)}-#{Date.today}" ) %></li>
             <% time += 0.5 %>
             <% end %>
@@ -40,7 +40,7 @@
           </div>
           <ul class="list-group list-group-flush">
             <% time = @doctor.opening_hour %>
-            <% until time == @doctor.closing_hour || time == @doctor.opening_hour + 3 %>
+            <% until time >= @doctor.closing_hour || time == @doctor.opening_hour + 3 %>
             <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor, "#{@doctor.float_to_hour(time)}-#{Date.today+1}" ) %></li>
             <% time += 0.5 %>
             <% end %>
@@ -52,7 +52,7 @@
           </div>
           <ul class="list-group list-group-flush">
             <% time = @doctor.opening_hour %>
-            <% until time == @doctor.closing_hour || time == @doctor.opening_hour + 3 %>
+            <% until time >= @doctor.closing_hour || time == @doctor.opening_hour + 3 %>
             <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor, "#{@doctor.float_to_hour(time)}-#{Date.today+2}" ) %></li>
             <% time += 0.5 %>
             <% end %>
