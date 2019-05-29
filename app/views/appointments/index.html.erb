@@ -1,15 +1,27 @@
-<div class="container">
+<div class="container mt-3">
   <div class="wrapper">
     <div class="row justify-content-center">
       <div class="col-12">
-        <h1>Appointments List:</h1>
+        <h1>Your appointments</h1>
         <% @appointments.each do |appointment| %>
-          <h3><%= appointment.doctor.full_name %> </h3>
-          <li><%= appointment.date.strftime("%b %e, %l:%M %p") %></li>
-          <li><%= appointment.doctor.address %></li>
-          <br>
+          <div class="card-product">
+            <img src="<%= appointment.doctor.photo %>">
+            <div class="card-product-infos">
+              <h3><%= appointment.date.strftime("%a, %b %e %l:%M %p") %> </h3>
+              <h2><%= appointment.doctor.full_name %> - <%= appointment.doctor.speciality %></h2>
+              <p><i class="fas fa-map-marked-alt"></i> <%= appointment.doctor.address %></p>
+              <p><i class="fas fa-phone"></i> <%= appointment.doctor.phone_number %></p>
+              <p><i class="fas fa-envelope"></i> <%= appointment.doctor.email %></p>
+              <% if appointment.is_confirmed %>
+                <p class="text-success font-weight-bold">Confirmed</p>
+              <% else %>
+                <p class="text-warning font-weight-bold">Waiting for confirmation</p>
+              <% end %>
+          </div>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
 </div>
+

@@ -130,13 +130,20 @@ doctor.save!
 
 puts "creating appointments"
 
-10.times do
+100.times do
   appointment = Appointment.new(
     date: Faker::Time.between(DateTime.now, DateTime.now+10),
     is_confirmed: [true, false].sample
   )
+  appointment.date = appointment.date.change(min: appointment.date.min < 30 ? 0 : 30)
   appointment.user = User.find(rand(User.first.id..User.last.id))
   appointment.doctor = Doctor.find(rand(Doctor.first.id..Doctor.last.id))
+
+  until ((1..5).include? appointment.date.wday) && ((appointment.doctor.opening_hour..appointment.doctor.closing_hour).include? appointment.date.hour)
+    appointment.date = Faker::Time.between(DateTime.now, DateTime.now+10)
+    appointment.date = appointment.date.change(min: appointment.date.min < 30 ? 0 : 30)
+  end
+
   appointment.save!
 end
 
