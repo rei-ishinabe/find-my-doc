@@ -154,9 +154,10 @@ puts "creating appointments"
   appointment.user = User.find(rand(User.second.id..User.last.id))
   appointment.doctor = Doctor.find(rand(Doctor.first.id..Doctor.last.id))
 
-  until ((1..5).include? appointment.date.wday) && ((appointment.doctor.opening_hour..appointment.doctor.closing_hour).include? appointment.date.hour)
-    appointment.date = Faker::Time.between(DateTime.now, DateTime.now+10)
-    appointment.date = appointment.date.change(min: appointment.date.min < 30 ? 0 : 30)
+  # check if the current date is a weekday, if it's in the doctor's opening hours and if he already has an appointment. If there is a conflict generate new date.
+  until ((1..5).include? appointment.date.wday) && ((appointment.doctor.opening_hour..appointment.doctor.closing_hour).include? appointment.date.hour) && !(appointment.doctor.appointments.find_by_date(appointment.date))
+      appointment.date = Faker::Time.between(DateTime.now, DateTime.now+10)
+      appointment.date = appointment.date.change(min: appointment.date.min < 30 ? 0 : 30)
   end
 
   appointment.save!
