@@ -1,7 +1,7 @@
 class AppointmentsController < ApplicationController
   def index
     @appointments = Appointment.all
-    @appointments = policy_scope(Appointment)
+    @appointments = policy_scope(Appointment).order(:date)
   end
 
   def new
