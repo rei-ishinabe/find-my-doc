@@ -21,6 +21,7 @@ gem 'uglifier'
 gem 'webpacker'
 
 gem "simple_calendar", "~> 2.0"
+gem 'geocoder'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
