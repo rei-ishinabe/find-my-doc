@@ -7,6 +7,12 @@
             <%= f.error_notification %>
 
             <div class="form-inputs">
+              <%= f.input :first_name,
+                          required: true,
+                          autofocus: true %>
+              <%= f.input :last_name,
+                          required: true,
+                          autofocus: true %>
               <%= f.input :email,
                           required: true,
                           autofocus: true,
@@ -20,10 +26,10 @@
                           input_html: { autocomplete: "new-password" } %>
             </div>
             <div class="form-actions">
-              <%= f.button :submit, "Sign up" %>
+              <%= f.button :submit, "Sign up", class:'btn btn-primary mb-3' %>
             </div>
           <% end %>
-          <%= render "doctors/shared/links" %>
+<!--           <%= render "doctors/shared/links" %> -->
       </div>
     </div>
   </div>
