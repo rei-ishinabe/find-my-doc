@@ -12,7 +12,7 @@
         <div class="dropdown">
           <img class="avatar dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" />
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <%= link_to "My appointments", "#", class: "dropdown-item" %>
+            <%= link_to "My Appointments", appointments_path, class: "dropdown-item" %>
             <%= link_to "Profile", "#", class: "dropdown-item" %>
             <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
@@ -27,7 +27,7 @@
             <%= image_tag "https://cdn.pixabay.com/photo/2014/04/03/10/32/user-310807_960_720.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <% end %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-            <%= link_to "My appointments", "#", class: "dropdown-item" %>
+            <%= link_to "My appointments", doctors_appointments_path, class: "dropdown-item" %>
             <%= link_to "Profile", "#", class: "dropdown-item" %>
             <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>

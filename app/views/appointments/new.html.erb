@@ -11,6 +11,7 @@
       <% end %>
     </div>
   </div>
+  <% if @time %>
   <% sp =@time.split("-") %>
   <% x = sp[0].split(":") %>
   <script>
@@ -20,5 +21,6 @@
     document.getElementById("appointment_date_2i").innerHTML ="<option>"+<%= sp[2]  %>+"</option>"
     document.getElementById("appointment_date_3i").innerHTML ="<option>"+<%= sp[3]  %>+"</option>"
   </script>
+  <% end %>
 </div>
 
