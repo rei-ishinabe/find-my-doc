@@ -35,4 +35,8 @@ class Doctor < ApplicationRecord
   def opening_hours
     "#{float_to_hour(opening_hour)} - #{float_to_hour(closing_hour)}"
   end
+
+  def self.specialities_list
+    SPECIALITIES
+  end
 end
