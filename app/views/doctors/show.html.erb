@@ -2,10 +2,12 @@
   <div class="row justify-content-center">
     <div class="col-12 ">
       <div class="row no-gutters">
-        <div class="col-md-6 card-detail mb-3 mt-5 d-flex justify-content-around">
+        <div class="col-md-6 card-detail mb-3 mt-5 d-flex justify-content-center">
 
-          <div class=" " >
-            <img src="<%= @doctor.photo %>" class=" img-thumbnail img-fluid rounded" style=width:100% style=height:100%alt="...">
+          <div class=" card" >
+         <!--    <img src="<%= @doctor.photo %>" class=" img-thumbnail img-fluid rounded"> -->
+         <%= cl_image_tag(@doctor.photo,
+      width: 220, height: 300, crop: :thumb, gravity: :face, class: " img-thumbnail img-fluid rounded" ) %>
           </div>
 
       <div class="">
