@@ -18,5 +18,9 @@ class DoctorsController < ApplicationController
   def show
     @doctor = Doctor.find(params[:id])
     authorize @doctor
+    @markers = [{
+          lat: @doctor.latitude,
+          lng: @doctor.longitude
+        }]
   end
 end
