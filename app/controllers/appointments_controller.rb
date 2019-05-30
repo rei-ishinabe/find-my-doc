@@ -14,7 +14,7 @@ class AppointmentsController < ApplicationController
 
   def create
     @doctor = Doctor.find(params[:doctor_id])
-    @appointment = Appointment.new(appointment_params)
+    @appointment = Appointment.new(user_id: current_user.id, doctor_id: params[:doctor_id], date: params[:time])
     authorize @appointment
     @appointment.doctor = @doctor
     @appointment.user = current_user

@@ -16,8 +16,6 @@
           <h5 class="card-text mb-3"><small class="text-muted"><%= @doctor.speciality %></small></h5>
           <p class="card-text"><i class="fas fa-envelope"></i> <%=  @doctor.email %></p>
           <p class="card-text"><i class="fas fa-phone"></i> <%= @doctor.phone_number %></p>
-          <span><%= link_to "Book an appointment", new_doctor_appointment_path(@doctor), class: "btn btn-outline-primary" %>
-          </span>
         </div>
       </div>
     </div>
@@ -40,8 +38,9 @@
 
               <% hour = time.floor %>
               <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
-              <% if @doctor.appointments.find_by_date(Time.current.change(hour: hour, min: minute)).nil? %>
-                <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor, "#{@doctor.float_to_hour(time)}-#{Date.today}" ) %></li>
+              <% input_time = Time.current.change(month: Date.today.month, day: Date.today.day, hour: hour, min: minute) %>
+              <% if @doctor.appointments.find_by_date(input_time).nil? %>
+                <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), doctor_appointments_path(@doctor, time: input_time ), method: :post %></li>
                 <% time += 0.5 %>
               <% else %>
                 <% time += 0.5 %>
@@ -66,8 +65,9 @@
 
               <% hour = time.floor %>
               <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
-              <% if @doctor.appointments.find_by_date(Time.current.change(day: (Date.tomorrow.day) ,hour: hour, min: minute)).nil? %>
-                <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor, "#{@doctor.float_to_hour(time)}-#{Date.tomorrow}" ) %></li>
+              <% input_time = Time.current.change(month: Date.tomorrow.month, day: Date.tomorrow.day, hour: hour, min: minute) %>
+              <% if @doctor.appointments.find_by_date(input_time).nil? %>
+                <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), doctor_appointments_path(@doctor, time: input_time ), method: :post %></li>
                 <% time += 0.5 %>
               <% else %>
                 <% time += 0.5 %>
@@ -93,8 +93,9 @@
 
               <% hour = time.floor %>
               <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
-              <% if @doctor.appointments.find_by_date(Time.current.change(month: (Date.current + 2).month, day: (Date.current + 2).day, hour: hour, min: minute)).nil? %>
-                <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor, "#{@doctor.float_to_hour(time)}-#{Date.current + 2}" ) %></li>
+              <% input_time = Time.current.change(month: (Date.current + 2).month, day: (Date.current + 2).day, hour: hour, min: minute) %>
+              <% if @doctor.appointments.find_by_date(input_time).nil? %>
+                <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), doctor_appointments_path(@doctor, time: input_time ), method: :post %></li>
                 <% time += 0.5 %>
               <% else %>
                 <% time += 0.5 %>
@@ -109,3 +110,5 @@
 </div>
 <div><%= link_to "Back to list", doctors_path, class: "btn btn-warning" %></div>
 </div>
+
+
