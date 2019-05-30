@@ -11,7 +11,7 @@
       <% if user_signed_in? %>
         <% unless params[:controller] == "pages" && params[:action] == "home" %>
           <%= form_tag(doctors_path, {method: :get, class: "form-inline my-2 my-lg-0 mx-2"}) do %>
-           <%= text_field_tag(:q) %>
+           <%=text_field_tag :q, nil, placeholder: "Tokyo"%>
            <select class="form-control form-control-lg select2" type="text" placeholder="speciality">
              <% Doctor.specialities_list.each do |speciality|%>
               <option value="AL"><%= speciality %></option>
