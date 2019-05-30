@@ -1,30 +1,32 @@
-<div class="container mt-3">
-  <div class="wrapper">
-    <div class="row justify-content-center">
-      <div class="col-12">
-        <h1>Your appointments</h1>
-        <% @appointments.each do |appointment| %>
-          <div class="card-product py-5">
-<!--             <img src="<%= appointment.doctor.photo %>"> -->
-            <div class="card-product-infos">
-              <h3><%= appointment.date.strftime("%a, %b %e %l:%M %p") %> </h3>
-              <h2><%= appointment.user.full_name %>
-              <p><i class="fas fa-phone"></i> <%= appointment.user.phone_number %></p>
-              <p><i class="fas fa-envelope"></i> <%= appointment.user.email %></p>
-              <% if appointment.is_confirmed %>
-                <p class="text-success font-weight-bold">Confirmed</p>
-              <% else %>
-                <p class="text-warning font-weight-bold">Not confirmed yet
-                <%= simple_form_for appointment, method: :patch, url: doctors_appointment_path(appointment) do |f| %>
-                  <%= f.input :is_confirmed, as: :hidden, input_html: {value: true } %>
-                  <%= f.submit 'Confirm', class:'btn btn-primary' %>
-                  <% end %>
-                </p>
-              <% end %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12">
+      <%= month_calendar attribute: :date, events: @appointments do |date, appointments| %>
+      <div style="font-size:12px; text-align: right;">
+        <%= date.strftime("%d") %>
+      </div>
+      <% appointments.each do |appointment| %>
+      <div style="font-size:14px;">
+        <% if appointment.is_confirmed %>
+          <div style="font-size:12px;">
+            <%= appointment.date.strftime(" %l:%M%P") %>
           </div>
+          <div>
+            <%= appointment.user.full_name %>
+          </div>
+        <% else %>
+          <div class="text-warning">
+            <%= appointment.date.strftime(" %l:%M%P") %> -
+            <%= appointment.user.full_name %>
+            <%= simple_form_for appointment, method: :patch, url: doctors_appointment_path(appointment) do |f| %>
+              <%= f.input :is_confirmed, as: :hidden, input_html: {value: true } %>
+              <%= f.submit 'Confirm', class:'m-0' %>
+            <% end %>
           </div>
         <% end %>
       </div>
+      <% end %>
+      <% end %>
     </div>
   </div>
 </div>
