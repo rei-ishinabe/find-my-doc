@@ -1,21 +1,22 @@
-<div class="container">
   <div class="mt-5">
-    <%= link_to  doctors_path, class: "btn btn-outline-warning" do %>
+    <%= link_to  doctors_path, class: "btn btn-primary pl-5" do %>
       <i class="fas fa-arrow-circle-left"></i>
     <% end %>
   </div>
+<div class="container">
   <div class="row justify-content-center">
     <div class="col-12 ">
       <div class="row no-gutters">
-        <div class="col-md-6 card-detail mb-3 mt-5 d-flex justify-content-center">
+        <div class="col-md-6 card-detail mb-3 mt-3 d-flex justify-content-between">
 
-          <div class=" card" >
-         <!--    <img src="<%= @doctor.photo %>" class=" img-thumbnail img-fluid rounded"> -->
+          <div class="" style="height: 100%; position: relative;" >
          <%= cl_image_tag(@doctor.photo,
-      width: 220, height: 300, crop: :thumb, gravity: :face, class: " img-thumbnail img-fluid rounded" ) %>
+      width: 220, height: 300, crop: :thumb, gravity: :face, class: "img-fluid" ) %>
+          <div class="card-shadow">
+          </div>
           </div>
 
-      <div class="">
+      <div class="" style="width: 310px">
         <div class="card-body">
           <h4 class="card-title mb-1"><%= @doctor.full_name %></h4>
           <h5 class="card-text mb-3"><small class="text-muted"><%= @doctor.speciality %></small></h5>
@@ -26,7 +27,11 @@
     </div>
 
 
-    <div class="card card-detail col-md-4 mb-3 mt-5 pt-2 ml-5">
+    <div class="col-md-1">
+
+    </div>
+
+    <div class="card card-detail col-md-4 mb-3 mt-3 pt-2 ">
       <h5>Available times</h5>
       <div class="d-flex justify-content-center">
         <div class="card" style="width: 7.7rem;">
