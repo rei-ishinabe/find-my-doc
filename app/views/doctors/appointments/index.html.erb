@@ -1,7 +1,7 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-12">
-      <%= month_calendar attribute: :date, events: @appointments do |date, appointments| %>
+      <%= week_calendar attribute: :date, events: @appointments do |date, appointments| %>
       <div style="font-size:12px; text-align: right;">
         <%= date.strftime("%d") %>
       </div>
