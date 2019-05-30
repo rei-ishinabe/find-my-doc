@@ -5,30 +5,95 @@
       <h4>No doctors with given parameters</h4>
     </div>
   <% else %>
-    <% @doctors.each do |doctor| %>
-      <div class="card-product">
-        <img src="<%= doctor.photo %>">
-        <div class="card-product-infos">
-          <% reviews = [] %>
-          <% doctor.reviews.each{ |review| reviews << review.stars } %>
-          <% reviews_average = reviews.inject{ |sum, el| sum + el }.to_f / reviews.size %>
-          <% r = (reviews_average * 2).round / 2.0 %>
-          <% #r = r.to_i == r ? r.to_i : r %>
-          <h2><%= link_to "#{doctor.full_name} - #{doctor.speciality.capitalize}" , doctor_path(doctor)  %></h2>
-          <p><% r.floor.times do %>
-            <i class="fas fa-star"></i>
+  <%  @doctors.each do |doctor| %>
+    <div class="card-product">
+      <img src="<%= doctor.photo %>">
+      <div class="card-product-infos">
+        <h2><%= link_to "#{doctor.full_name} - #{doctor.speciality.capitalize}" , doctor_path(doctor)  %></h2>
+        <p><i class="fas fa-map-marked-alt"></i> <%= doctor.address %></p>
+        <p><i class="fas fa-phone"></i> <%= doctor.phone_number %></p>
+        <p><i class="fas fa-envelope"></i> <%= doctor.email %></p>
+        <p><i class="fas fa-calendar-alt"></i> <%= doctor.opening_hours %></p>
+      </div>
+      <div>
+      <h5>Available times</h5>
+      <div class="d-flex justify-content-center">
+        <div class="card" style="width: 7.7rem;">
+          <div class="card-header">
+            Today
+          </div>
+          <ul class="list-group list-group-flush">
+            <% time = (doctor.opening_hour > DateTime.now.hour ? doctor.opening_hour : DateTime.now.hour + 1) %>
+            <% 3.times do %>
+              <% break if time >= doctor.closing_hour %>
+
+              <% hour = time.floor %>
+              <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
+              <% input_time = Time.current.change(month: Date.today.month, day: Date.today.day, hour: hour, min: minute) %>
+              <% if doctor.appointments.find_by_date(input_time).nil? %>
+                <li class="list-group-item"><%= link_to doctor.float_to_hour(time), doctor_appointments_path(doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
+                <% time += 0.5 %>
+              <% else %>
+                <% time += 0.5 %>
+                 <li class="list-group-item"><%= "Busy" %></li>
+              <% end %>
             <% end %>
-            <%= '<i class="fas fa-star-half-alt"></i>'.html_safe if (r.round - r.floor) == 1 %>
-            <% (5 - r.round).times do %>
-            <i class="far fa-star"></i>
+          </ul>
+        </div>
+
+        <div class="card" style="width: 7.7rem;">
+          <div class="card-header">
+            <% #if Date.today.wday + 1 == 6 %>
+            <%= "" %>
+            <% #else %>
+            <%= "Tomorrow" %>
+            <% #end %>
+          </div>
+          <ul class="list-group list-group-flush">
+            <% time = doctor.opening_hour %>
+            <% 3.times do %>
+              <% break if time >= doctor.closing_hour %>
+
+              <% hour = time.floor %>
+              <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
+              <% input_time = Time.current.change(month: Date.tomorrow.month, day: Date.tomorrow.day, hour: hour, min: minute) %>
+              <% if doctor.appointments.find_by_date(input_time).nil? %>
+                <li class="list-group-item"><%= link_to doctor.float_to_hour(time), doctor_appointments_path(doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
+                <% time += 0.5 %>
+              <% else %>
+                <% time += 0.5 %>
+                 <li class="list-group-item"><%= "Busy" %></li>
+              <% end %>
             <% end %>
-            <%= reviews_average.round(1) %> by <%= reviews.length %> patients.</p>
-          <p><i class="fas fa-map-marked-alt"></i> <%= doctor.address %></p>
-          <p><i class="fas fa-phone"></i> <%= doctor.phone_number %></p>
-          <p><i class="fas fa-envelope"></i> <%= doctor.email %></p>
-          <p><i class="fas fa-calendar-alt"></i> <%= doctor.opening_hours %></p>
+          </ul>
+        </div>
+        <div class="card" style="width: 7.7rem;">
+          <div class="card-header">
+            <% #if Date.today.wday + 2 == 6 %>
+            <%= "" %>
+            <% #elsif Date.today.wday + 2 == 7 %>
+            <%= "" %>
+            <% #else %>
+            <%= (Date.today + 2).strftime("%A") %>
+            <% #end %>
+          </div>
+          <ul class="list-group list-group-flush">
+            <% time = doctor.opening_hour %>
+            <% 3.times do %>
+              <% break if time >= doctor.closing_hour %>
+
+              <% hour = time.floor %>
+              <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
+              <% input_time = Time.current.change(month: (Date.current + 2).month, day: (Date.current + 2).day, hour: hour, min: minute) %>
+              <% if doctor.appointments.find_by_date(input_time).nil? %>
+                <li class="list-group-item"><%= link_to doctor.float_to_hour(time), doctor_appointments_path(doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
+                <% time += 0.5 %>
+              <% else %>
+                <% time += 0.5 %>
+                 <li class="list-group-item"><%= "Busy" %></li>
+              <% end %>
+            <% end %>
+          </ul>
         </div>
       </div>
-    <% end %>
-  <% end %>
-</div>
+      </div>
