@@ -14,7 +14,12 @@
               <% if appointment.is_confirmed %>
                 <p class="text-success font-weight-bold">Confirmed</p>
               <% else %>
-                <p class="text-warning font-weight-bold">Not confirmed yet</p>
+                <p class="text-warning font-weight-bold">Not confirmed yet
+                <%= simple_form_for appointment, method: :patch, url: doctors_appointment_path(appointment) do |f| %>
+                  <%= f.input :is_confirmed, as: :hidden, input_html: {value: true } %>
+                  <%= f.submit 'Confirm', class:'btn btn-primary' %>
+                  <% end %>
+                </p>
               <% end %>
           </div>
           </div>

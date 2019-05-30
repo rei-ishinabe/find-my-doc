@@ -4,7 +4,10 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get '/doctors/appointments', to: 'doctors/appointments#index'
   resources :doctors, only: [:index, :show] do
-        resources :appointments, only: [:new, :create]
+    resources :appointments, only: [:new, :create, :update]
+  end
+  namespace :doctors do
+    resources :appointments, only: [:update]
   end
   resources :appointments, only: [:index, :update]
 
