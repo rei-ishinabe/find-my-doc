@@ -1,4 +1,12 @@
 <div class="container mt-5">
+  <div class="text-right">
+    <% pending_appointments = @appointments.count{ |app| app.is_confirmed == false } %>
+    <% if pending_appointments == 0 %>
+      <h5>All appointments confirmed</h5>
+    <% else %>
+      <h5><%= pending_appointments %> appointments to confirm</h5>
+    <% end %>
+  </div>
   <div class="row">
     <div class="col-12">
       <%= week_calendar attribute: :date, events: @appointments do |date, appointments| %>
