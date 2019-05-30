@@ -1,15 +1,34 @@
 <div class="container mt-5">
   <h1>Search result for doctors</h1>
-  <%  @doctors.each do |doctor| %>
-    <div class="card-product">
-      <img src="<%= doctor.photo %>">
-      <div class="card-product-infos">
-        <h2><%= link_to "#{doctor.full_name} - #{doctor.speciality.capitalize}" , doctor_path(doctor)  %></h2>
-        <p><i class="fas fa-map-marked-alt"></i> <%= doctor.address %></p>
-        <p><i class="fas fa-phone"></i> <%= doctor.phone_number %></p>
-        <p><i class="fas fa-envelope"></i> <%= doctor.email %></p>
-        <p><i class="fas fa-calendar-alt"></i> <%= doctor.opening_hours %></p>
-      </div>
+  <% if @doctors.nil? %>
+    <div class="card-product d-flex justify-content-center align-center">
+      <h4>No doctors with given parameters</h4>
     </div>
+  <% else %>
+    <% @doctors.each do |doctor| %>
+      <div class="card-product">
+        <img src="<%= doctor.photo %>">
+        <div class="card-product-infos">
+          <% reviews = [] %>
+          <% doctor.reviews.each{ |review| reviews << review.stars } %>
+          <% reviews_average = reviews.inject{ |sum, el| sum + el }.to_f / reviews.size %>
+          <% r = (reviews_average * 2).round / 2.0 %>
+          <% #r = r.to_i == r ? r.to_i : r %>
+          <h2><%= link_to "#{doctor.full_name} - #{doctor.speciality.capitalize}" , doctor_path(doctor)  %></h2>
+          <p><% r.floor.times do %>
+            <i class="fas fa-star"></i>
+            <% end %>
+            <%= '<i class="fas fa-star-half-alt"></i>'.html_safe if (r.round - r.floor) == 1 %>
+            <% (5 - r.round).times do %>
+            <i class="far fa-star"></i>
+            <% end %>
+            <%= reviews_average.round(1) %> by <%= reviews.length %> patients.</p>
+          <p><i class="fas fa-map-marked-alt"></i> <%= doctor.address %></p>
+          <p><i class="fas fa-phone"></i> <%= doctor.phone_number %></p>
+          <p><i class="fas fa-envelope"></i> <%= doctor.email %></p>
+          <p><i class="fas fa-calendar-alt"></i> <%= doctor.opening_hours %></p>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 </div>
