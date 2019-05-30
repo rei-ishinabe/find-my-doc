@@ -1,5 +1,10 @@
 <div class="container mt-5">
   <h1>Search result for doctors</h1>
+  <% if @doctors.nil? %>
+    <div class="card-product d-flex justify-content-center align-center">
+      <h4>No doctors with given parameters</h4>
+    </div>
+  <% else %>
   <%  @doctors.each do |doctor| %>
     <div class="card-product">
       <img src="<%= doctor.photo %>">
@@ -92,6 +97,3 @@
         </div>
       </div>
       </div>
-    </div>
-  <% end %>
-</div>
