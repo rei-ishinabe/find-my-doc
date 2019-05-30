@@ -31,82 +31,140 @@
 
     </div>
 
-    <div class="card card-detail col-md-4 mb-3 mt-3 pt-2 ">
+    <div class="card card-detail col-md-5 mb-3 mt-3 pt-2 text-center" style="font-size: x-small;">
       <h5>Available times</h5>
       <div class="d-flex justify-content-center">
-        <div class="card" style="width: 7.7rem;">
+        <div class="card" style="width: 5.7rem;">
           <div class="card-header">
             Today
           </div>
           <ul class="list-group list-group-flush">
-            <% time = (@doctor.opening_hour > DateTime.now.hour ? @doctor.opening_hour : DateTime.now.hour + 1) %>
-            <% 6.times do %>
-              <% break if time >= @doctor.closing_hour %>
+            <% if Date.today.wday == 6 || Date.today.wday == 0 %>
+              <% %>
+            <% else %>
+              <% time = (@doctor.opening_hour > DateTime.now.hour ? @doctor.opening_hour : DateTime.now.hour + 1) %>
+              <% 6.times do %>
+                <% break if time >= @doctor.closing_hour %>
 
-              <% hour = time.floor %>
-              <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
-              <% input_time = Time.current.change(month: Date.today.month, day: Date.today.day, hour: hour, min: minute) %>
-              <% if @doctor.appointments.find_by_date(input_time).nil? %>
-                <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), doctor_appointments_path(@doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{@doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
-                <% time += 0.5 %>
-              <% else %>
-                <% time += 0.5 %>
-                 <li class="list-group-item"><%= "Busy" %></li>
+                <% hour = time.floor %>
+                <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
+                <% input_time = Time.current.change(month: Date.today.month, day: Date.today.day, hour: hour, min: minute) %>
+                <% if @doctor.appointments.find_by_date(input_time).nil? %>
+                  <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), doctor_appointments_path(@doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{@doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
+                  <% time += 0.5 %>
+                <% else %>
+                  <% time += 0.5 %>
+                   <li class="list-group-item"><%= "Busy" %></li>
+                <% end %>
               <% end %>
             <% end %>
           </ul>
         </div>
 
-        <div class="card" style="width: 7.7rem;">
+        <div class="card" style="width: 5.7rem;">
           <div class="card-header">
-            <% #if Date.today.wday + 1 == 6 %>
-            <%= "" %>
-            <% #else %>
             <%= "Tomorrow" %>
-            <% #end %>
           </div>
           <ul class="list-group list-group-flush">
-            <% time = @doctor.opening_hour %>
-            <% 6.times do %>
-              <% break if time >= @doctor.closing_hour %>
+            <% if Date.tomorrow.wday == 6 || Date.tomorrow.wday == 0 %>
+              <% %>
+            <% else %>
+              <% time = @doctor.opening_hour %>
+              <% 6.times do %>
+                <% break if time >= @doctor.closing_hour %>
 
-              <% hour = time.floor %>
-              <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
-              <% input_time = Time.current.change(month: Date.tomorrow.month, day: Date.tomorrow.day, hour: hour, min: minute) %>
-              <% if @doctor.appointments.find_by_date(input_time).nil? %>
-                <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), doctor_appointments_path(@doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{@doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
-                <% time += 0.5 %>
-              <% else %>
-                <% time += 0.5 %>
-                 <li class="list-group-item"><%= "Busy" %></li>
+                <% hour = time.floor %>
+                <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
+                <% input_time = Time.current.change(month: Date.tomorrow.month, day: Date.tomorrow.day, hour: hour, min: minute) %>
+                <% if @doctor.appointments.find_by_date(input_time).nil? %>
+                  <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), doctor_appointments_path(@doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{@doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
+                  <% time += 0.5 %>
+                <% else %>
+                  <% time += 0.5 %>
+                   <li class="list-group-item"><%= "Busy" %></li>
+                <% end %>
               <% end %>
             <% end %>
           </ul>
         </div>
-        <div class="card" style="width: 7.7rem;">
+        <div class="card" style="width: 5.7rem;">
           <div class="card-header">
-            <% #if Date.today.wday + 2 == 6 %>
-            <%= "" %>
-            <% #elsif Date.today.wday + 2 == 7 %>
-            <%= "" %>
-            <% #else %>
-            <%= (Date.today + 2).strftime("%A") %>
-            <% #end %>
+            <% column_day = Date.current + 2 %>
+            <%= column_day.strftime("%A") %>
           </div>
           <ul class="list-group list-group-flush">
-            <% time = @doctor.opening_hour %>
-            <% 6.times do %>
-              <% break if time >= @doctor.closing_hour %>
+            <% if column_day.wday == 6 || column_day.wday == 0 %>
+              <% %>
+            <% else %>
+              <% time = @doctor.opening_hour %>
+              <% 6.times do %>
+                <% break if time >= @doctor.closing_hour %>
 
-              <% hour = time.floor %>
-              <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
-              <% input_time = Time.current.change(month: (Date.current + 2).month, day: (Date.current + 2).day, hour: hour, min: minute) %>
-              <% if @doctor.appointments.find_by_date(input_time).nil? %>
-                <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), doctor_appointments_path(@doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{@doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
-                <% time += 0.5 %>
-              <% else %>
-                <% time += 0.5 %>
-                 <li class="list-group-item"><%= "Busy" %></li>
+                <% hour = time.floor %>
+                <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
+                <% input_time = Time.current.change(month: column_day.month, day: column_day.day, hour: hour, min: minute) %>
+                <% if @doctor.appointments.find_by_date(input_time).nil? %>
+                  <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), doctor_appointments_path(@doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{@doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
+                  <% time += 0.5 %>
+                <% else %>
+                  <% time += 0.5 %>
+                   <li class="list-group-item"><%= "Busy" %></li>
+                <% end %>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+        <div class="card" style="width: 5.7rem;">
+          <div class="card-header">
+            <% column_day = Date.current + 3 %>
+            <%= column_day.strftime("%A") %>
+          </div>
+          <ul class="list-group list-group-flush">
+            <% if column_day.wday == 6 || column_day.wday == 0 %>
+              <% %>
+            <% else %>
+              <% time = @doctor.opening_hour %>
+              <%  %>
+              <% 6.times do %>
+                <% break if time >= @doctor.closing_hour %>
+
+                <% hour = time.floor %>
+                <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
+                <% input_time = Time.current.change(month: column_day.month, day: column_day.day, hour: hour, min: minute) %>
+                <% if @doctor.appointments.find_by_date(input_time).nil? %>
+                  <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), doctor_appointments_path(@doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{@doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
+                  <% time += 0.5 %>
+                <% else %>
+                  <% time += 0.5 %>
+                   <li class="list-group-item"><%= "Busy" %></li>
+                <% end %>
+              <% end %>
+            <% end %>
+          </ul>
+        </div>
+        <div class="card" style="width: 5.7rem;">
+          <div class="card-header">
+            <% column_day = Date.current + 4 %>
+            <%= column_day.strftime("%A") %>
+          </div>
+          <ul class="list-group list-group-flush">
+            <% if column_day.wday == 6 || column_day.wday == 0 %>
+              <% %>
+            <% else %>
+              <% time = @doctor.opening_hour %>
+              <% 6.times do %>
+                <% break if time >= @doctor.closing_hour %>
+
+                <% hour = time.floor %>
+                <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
+                <% input_time = Time.current.change(month: column_day.month, day: column_day.day, hour: hour, min: minute) %>
+                <% if @doctor.appointments.find_by_date(input_time).nil? %>
+                  <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), doctor_appointments_path(@doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{@doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
+                  <% time += 0.5 %>
+                <% else %>
+                  <% time += 0.5 %>
+                   <li class="list-group-item"><%= "Busy" %></li>
+                <% end %>
               <% end %>
             <% end %>
           </ul>
