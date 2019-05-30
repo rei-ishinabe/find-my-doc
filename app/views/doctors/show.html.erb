@@ -1,24 +1,29 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-12 ">
-     <div class="row no-gutters">
-      <div class="col-md-7 card-detail mb-3 mt-5 d-flex justify-content-center">
-       <div class="">
-        <img src="<%= @doctor.photo %>" class="card-img" alt="...">
-      </div>
+      <div class="row no-gutters">
+        <div class="col-md-6 card-detail mb-3 mt-5 d-flex justify-content-around">
+
+          <div class=" " >
+            <img src="<%= @doctor.photo %>" class=" img-thumbnail img-fluid rounded" style=width:100% style=height:100%alt="...">
+          </div>
+
       <div class="">
         <div class="card-body">
           <h4 class="card-title mb-1"><%= @doctor.full_name %></h4>
           <h5 class="card-text mb-3"><small class="text-muted"><%= @doctor.speciality %></small></h5>
           <p class="card-text"><i class="fas fa-envelope"></i> <%=  @doctor.email %></p>
           <p class="card-text"><i class="fas fa-phone"></i> <%= @doctor.phone_number %></p>
-          <span><%= link_to "Book an appointment", new_doctor_appointment_path(@doctor), class: "btn btn-outline-primary" %></span>
+          <span><%= link_to "Book an appointment", new_doctor_appointment_path(@doctor), class: "btn btn-outline-primary" %>
+          </span>
         </div>
       </div>
     </div>
-  <div class="col-md-1">
 
-  </div>
+    <div class="col-md-1">
+
+    </div>
+
     <div class="card card-detail col-md-4 mb-3 mt-5 pt-2">
       <h5>Available times</h5>
       <div class="d-flex justify-content-center">
@@ -43,6 +48,7 @@
             <% end %>
           </ul>
         </div>
+
         <div class="card" style="width: 7.7rem;">
           <div class="card-header">
             <% #if Date.today.wday + 1 == 6 %>
