@@ -1,14 +1,23 @@
-<div class="container">
+<div class="container mt-3">
   <div class="wrapper">
     <div class="row justify-content-center">
       <div class="col-12">
-        <h1>Appointments List:</h1>
+        <h1>Your appointments</h1>
         <% @appointments.each do |appointment| %>
-          <h3><%= appointment.user.first_name %> <%= appointment.user.last_name %> </h3>
-          <li><%= appointment.date.strftime("%b %e, %l:%M %p") %></li>
-          <li><%= appointment.user.email %></li>
-          <li><%= appointment.user.phone_number %></li>
-          <li><%= appointment.is_confirmed ? 'Confirmed' : 'Not confirmed' %></li>
+          <div class="card-product py-5">
+<!--             <img src="<%= appointment.doctor.photo %>"> -->
+            <div class="card-product-infos">
+              <h3><%= appointment.date.strftime("%a, %b %e %l:%M %p") %> </h3>
+              <h2><%= appointment.user.full_name %>
+              <p><i class="fas fa-phone"></i> <%= appointment.user.phone_number %></p>
+              <p><i class="fas fa-envelope"></i> <%= appointment.user.email %></p>
+              <% if appointment.is_confirmed %>
+                <p class="text-success font-weight-bold">Confirmed</p>
+              <% else %>
+                <p class="text-warning font-weight-bold">Not confirmed yet</p>
+              <% end %>
+          </div>
+          </div>
         <% end %>
       </div>
     </div>

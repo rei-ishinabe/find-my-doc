@@ -9,7 +9,7 @@ class DoctorPolicy < ApplicationPolicy
     return true
   end
 
-  def new?
+  def create?
     return true
   end
 

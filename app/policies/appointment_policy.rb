@@ -4,6 +4,14 @@ class AppointmentPolicy < ApplicationPolicy
       scope.where(user: user)
     end
   end
+
+  class DoctorScope < Scope
+    def resolve
+      scope.where(doctor: user)
+    end
+  end
+
+
     def create?
       true
     end
