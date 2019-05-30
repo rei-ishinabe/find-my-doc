@@ -6,25 +6,27 @@
         <%= date.strftime("%d") %>
       </div>
       <% appointments.each do |appointment| %>
-      <div style="font-size:14px;">
         <% if appointment.is_confirmed %>
           <div style="font-size:12px;">
             <%= appointment.date.strftime(" %l:%M%P") %>
           </div>
-          <div>
+          <div style="font-size:14px;">
             <%= appointment.user.full_name %>
           </div>
         <% else %>
-          <div class="text-warning">
-            <%= appointment.date.strftime(" %l:%M%P") %> -
-            <%= appointment.user.full_name %>
+          <div style="font-size:12px;">
+            <%= appointment.date.strftime(" %l:%M%P") %>
+          </div>
+          <div style="font-size:14px;" class="text-warning">
+           <%= appointment.user.full_name %>
+          </div>
+          <div>
             <%= simple_form_for appointment, method: :patch, url: doctors_appointment_path(appointment) do |f| %>
               <%= f.input :is_confirmed, as: :hidden, input_html: {value: true } %>
-              <%= f.submit 'Confirm', class:'m-0' %>
+              <%= f.submit 'Confirm', class:'mb-3 btn btn-primary btn-sm' %>
             <% end %>
           </div>
         <% end %>
-      </div>
       <% end %>
       <% end %>
     </div>
