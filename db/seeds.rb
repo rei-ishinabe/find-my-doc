@@ -42,7 +42,7 @@ puts "creating doctors"
 doctor = Doctor.new(
   first_name: 'Kosei',
   last_name: 'Yano',
-  email: Faker::Internet.email('yano'),
+  email: 'yano@kosei.com',
   password: "secret",
   phone_number: '03-5962-7940',
   speciality: "dentist",
