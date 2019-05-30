@@ -1,5 +1,7 @@
 class Doctor < ApplicationRecord
   has_many :appointments, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+
 
   SPECIALITIES = ["dentist", "general practicioner", "allergist", "cardiologist", "dermatologist", "gastroenterologist", "hematologist", "internist", "neurologist", "oncologist", "ophthalmologist", "osteopath", "otolaryngologist", "pediatrician", "plastic surgeon", "podiatrist", "psychiatrist", "pulmonologist", "rheumatologist", "surgeon", "urologist", "other"]
 

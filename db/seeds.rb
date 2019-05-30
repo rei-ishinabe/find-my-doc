@@ -10,6 +10,7 @@ require 'faker'
 
 puts "emptying database"
 
+Review.destroy_all
 Appointment.destroy_all
 User.destroy_all
 Doctor.destroy_all
@@ -147,7 +148,7 @@ puts "creating appointments"
 
 100.times do
   appointment = Appointment.new(
-    date: Faker::Time.between(DateTime.now, DateTime.now+10),
+    date: Faker::Time.between(DateTime.now-2, DateTime.now+10),
     is_confirmed: [true, false].sample
   )
   appointment.date = appointment.date.change(min: appointment.date.min < 30 ? 0 : 30)
@@ -156,11 +157,37 @@ puts "creating appointments"
 
   # check if the current date is a weekday, if it's in the doctor's opening hours and if he already has an appointment. If there is a conflict generate new date.
   until ((1..5).include? appointment.date.wday) && ((appointment.doctor.opening_hour..appointment.doctor.closing_hour).include? appointment.date.hour) && !(appointment.doctor.appointments.find_by_date(appointment.date))
-      appointment.date = Faker::Time.between(DateTime.now, DateTime.now+10)
+      appointment.date = Faker::Time.between(DateTime.now-2, DateTime.now+10)
       appointment.date = appointment.date.change(min: appointment.date.min < 30 ? 0 : 30)
   end
 
   appointment.save!
+end
+
+puts "creating reviews"
+
+User.all.each do |user|
+  user.doctors.uniq.each do |doctor|
+    stars = rand(1..5)
+    case stars
+    when 1
+      content = "sucked"
+    when 2
+      content = "mediocre"
+    when 3
+      content = "ok"
+    when 4
+      content = "good"
+    when 5
+      content = "excellent"
+    else
+      content = "I don't know"
+    end
+    review = Review.new(stars: stars, content: content)
+    review.user = user
+    review.doctor = doctor
+    review.save!
+  end
 end
 
 puts "finished"
