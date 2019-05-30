@@ -28,33 +28,70 @@
           </div>
           <ul class="list-group list-group-flush">
             <% time = (@doctor.opening_hour > DateTime.now.hour ? @doctor.opening_hour : DateTime.now.hour + 1) %>
-            <% until time >= @doctor.closing_hour || time == @doctor.opening_hour + 3 %>
-            <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor, "#{@doctor.float_to_hour(time)}-#{Date.today}" ) %></li>
-            <% time += 0.5 %>
+            <% 6.times do %>
+              <% break if time >= @doctor.closing_hour %>
+
+              <% hour = time.floor %>
+              <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
+              <% if @doctor.appointments.find_by_date(Time.current.change(hour: hour, min: minute)).nil? %>
+                <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor, "#{@doctor.float_to_hour(time)}-#{Date.today}" ) %></li>
+                <% time += 0.5 %>
+              <% else %>
+                <% time += 0.5 %>
+                 <li class="list-group-item"><%= "Busy" %></li>
+              <% end %>
             <% end %>
           </ul>
         </div>
         <div class="card" style="width: 7.7rem;">
           <div class="card-header">
-            Tomorrow
+            <% #if Date.today.wday + 1 == 6 %>
+            <%= "" %>
+            <% #else %>
+            <%= "Tomorrow" %>
+            <% #end %>
           </div>
           <ul class="list-group list-group-flush">
             <% time = @doctor.opening_hour %>
-            <% until time >= @doctor.closing_hour || time == @doctor.opening_hour + 3 %>
-            <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor, "#{@doctor.float_to_hour(time)}-#{Date.today+1}" ) %></li>
-            <% time += 0.5 %>
+            <% 6.times do %>
+              <% break if time >= @doctor.closing_hour %>
+
+              <% hour = time.floor %>
+              <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
+              <% if @doctor.appointments.find_by_date(Time.current.change(day: (Date.tomorrow.day) ,hour: hour, min: minute)).nil? %>
+                <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor, "#{@doctor.float_to_hour(time)}-#{Date.tomorrow}" ) %></li>
+                <% time += 0.5 %>
+              <% else %>
+                <% time += 0.5 %>
+                 <li class="list-group-item"><%= "Busy" %></li>
+              <% end %>
             <% end %>
           </ul>
         </div>
         <div class="card" style="width: 7.7rem;">
           <div class="card-header">
+            <% #if Date.today.wday + 2 == 6 %>
+            <%= "" %>
+            <% #elsif Date.today.wday + 2 == 7 %>
+            <%= "" %>
+            <% #else %>
             <%= (Date.today + 2).strftime("%A") %>
+            <% #end %>
           </div>
           <ul class="list-group list-group-flush">
             <% time = @doctor.opening_hour %>
-            <% until time >= @doctor.closing_hour || time == @doctor.opening_hour + 3 %>
-            <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor, "#{@doctor.float_to_hour(time)}-#{Date.today+2}" ) %></li>
-            <% time += 0.5 %>
+            <% 6.times do %>
+              <% break if time >= @doctor.closing_hour %>
+
+              <% hour = time.floor %>
+              <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
+              <% if @doctor.appointments.find_by_date(Time.current.change(month: (Date.current + 2).month, day: (Date.current + 2).day, hour: hour, min: minute)).nil? %>
+                <li class="list-group-item"><%= link_to @doctor.float_to_hour(time), new_doctor_appointment_path(@doctor, "#{@doctor.float_to_hour(time)}-#{Date.current + 2}" ) %></li>
+                <% time += 0.5 %>
+              <% else %>
+                <% time += 0.5 %>
+                 <li class="list-group-item"><%= "Busy" %></li>
+              <% end %>
             <% end %>
           </ul>
         </div>
