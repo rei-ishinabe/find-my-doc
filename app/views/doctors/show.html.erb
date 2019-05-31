@@ -177,7 +177,19 @@
 <div class="container">
   <div class="row">
     <div class="col-12">
-      @review
+      <div class="col-md-6 card-detail">
+        <ul>
+          <% @doctor.reviews.each do |review| %>
+            <li><% review.stars.times do %>
+              <i class="fas fa-star"></i>
+              <% end %>
+              <% (5 - review.stars).times do %>
+              <i class="far fa-star"></i>
+              <% end %>
+            <%= review.content %>, by <%= review.user.full_name %></li>
+          <% end %>
+      </ul>
+      </div>
     </div>
   </div>
 </div>
