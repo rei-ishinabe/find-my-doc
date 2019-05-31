@@ -61,7 +61,7 @@ doctor = Doctor.new(
   password: "secret",
   phone_number: '03-1234-5678',
   speciality: "dentist",
-  address: '2-11-3, Meguro, Meguro-shi, Tokyo, Japan',
+  address: '1-5-1 Shinjuku, Shinjuku-ku Tokyo, Japan',
   gender: "male",
   opening_hour: rand(7..10),
   closing_hour: rand(16..19),
