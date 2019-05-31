@@ -55,6 +55,21 @@ doctor.remote_photo_url = "https://haplus.jp/en/imgs/shibuya/doctor/1.jpg"
 doctor.save!
 
 doctor = Doctor.new(
+  first_name: 'Rei',
+  last_name: 'Ishinabe',
+  email: 'rei@ishinabe.com',
+  password: "secret",
+  phone_number: '03-1234-5678',
+  speciality: "dentist",
+  address: '2-11-3, Meguro, Meguro-shi, Tokyo, Japan',
+  gender: "male",
+  opening_hour: rand(7..10),
+  closing_hour: rand(16..19),
+)
+doctor.remote_photo_url = "https://avatars0.githubusercontent.com/u/46408233?v=4"
+doctor.save!
+
+doctor = Doctor.new(
   first_name: 'Hanae',
   last_name: 'Morimura',
   email: Faker::Internet.email('morimura'),
@@ -161,6 +176,7 @@ puts "creating appointments"
       appointment.date = appointment.date.change(min: appointment.date.min < 30 ? 0 : 30)
   end
 
+  appointment.is_confirmed = true if appointment.date < DateTime.now
   appointment.save!
 end
 
@@ -171,15 +187,15 @@ User.all.each do |user|
     stars = rand(1..5)
     case stars
     when 1
-      content = "sucked"
+      content = "The doctor doesn't even speak proper English!!! Waste of time and money!!!"
     when 2
-      content = "mediocre"
+      content = "If I hadn't have my issue I wouldn't have gone here. The doctor fixed me but there is still a long way to go before making it a pleasant experience."
     when 3
-      content = "ok"
+      content = "It was OK, nothing much else to say. Just make sure that you are covered by insurance otherwise it can be quite a hassle."
     when 4
-      content = "good"
+      content = "Japanese level care. Good doctor, nurses were also quite supportive, but some small issues here and there."
     when 5
-      content = "excellent"
+      content = "I was in big pain, but the doctor was extremely kind, patient, and supportive. This turned the difficult situation into a positive experience. 10/10 recommend."
     else
       content = "I don't know"
     end
