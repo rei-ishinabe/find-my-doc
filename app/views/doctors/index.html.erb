@@ -10,12 +10,13 @@
           <div class="card-product">
             <img src="<%= doctor.photo %>">
             <div class="card-product-infos">
-              <h2 class="mb-3"><%= link_to "#{doctor.full_name} - #{doctor.speciality.capitalize}" , doctor_path(doctor)  %></h2>
+              <h2 class="mb-1"><%= link_to doctor.full_name, doctor_path(doctor)  %></h2>
+              <div class="mb-1" style="opacity: 0.7; font-size: 14px;"><%= doctor.speciality.capitalize %></div>
               <p><i class="fas fa-map-marked-alt"></i> <%= doctor.address %></p>
               <p><i class="fas fa-phone"></i> <%= doctor.phone_number %></p>
               <p><i class="fas fa-envelope"></i> <%= doctor.email %></p>
               <p><i class="fas fa-calendar-alt"></i> <%= doctor.opening_hours %></p>
-              <p class="mt-3">
+              <p class="mt-2">
                 <% r = (doctor.average_rating * 2).round / 2.0 %>
                 <% r.floor.times do %>
                 <i class="fas fa-star"></i>
