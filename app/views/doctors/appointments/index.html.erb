@@ -1,42 +1,47 @@
-<div class="container mt-5">
-  <div class="text-right">
-    <% pending_appointments = @appointments.count{ |app| app.is_confirmed == false } %>
-    <% if pending_appointments == 0 %>
-      <h5>All appointments confirmed</h5>
-    <% else %>
-      <h5><%= pending_appointments %> appointments to confirm</h5>
-    <% end %>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <%= week_calendar attribute: :date, events: @appointments do |date, appointments| %>
-      <div style="font-size:12px; text-align: right;">
-        <%= date.strftime("%d") %>
-      </div>
-      <% appointments.each do |appointment| %>
-        <% if appointment.is_confirmed %>
-          <div style="font-size:12px;">
-            <%= appointment.date.strftime(" %l:%M%P") %>
-          </div>
-          <div style="font-size:14px;">
-            <%= appointment.user.full_name %>
-          </div>
-        <% else %>
-          <div style="font-size:12px;">
-            <%= appointment.date.strftime(" %l:%M%P") %>
-          </div>
-          <div style="font-size:14px;" class="text-warning">
-           <%= appointment.user.full_name %>
-          </div>
-          <div>
-            <%= simple_form_for appointment, method: :patch, url: doctors_appointment_path(appointment) do |f| %>
-              <%= f.input :is_confirmed, as: :hidden, input_html: {value: true } %>
-              <%= f.submit 'Confirm', class:'mb-3 btn btn-primary btn-sm' %>
+<div class="bg-white pt-3">
+  <div class="container mt-5">
+    <div class="text-right">
+      <% pending_appointments = @appointments.count{ |app| app.is_confirmed == false } %>
+      <% if pending_appointments == 0 %>
+        <h5>All appointments confirmed</h5>
+      <% else %>
+        <h5><%= pending_appointments %> appointments to confirm</h5>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <%= week_calendar attribute: :date, events: @appointments do |date, appointments| %>
+        <div style="font-size:14px; text-align: right;">
+          <%= date.strftime("%d") %>
+        </div>
+        <div class="">
+          <% appointments.each do |appointment| %>
+            <% if appointment.is_confirmed %>
+              <div style="font-size:12px;">
+                <%= appointment.date.strftime(" %l:%M%P") %>
+              </div>
+              <div class="card-h" style="font-size:14px;">
+                <%= appointment.user.full_name %>
+              </div>
+            <% else %>
+              <div style="font-size:12px;padding-top:8px;">
+                <%= appointment.date.strftime(" %l:%M%P") %>
+              </div>
+              <div style="font-size:14px;" class="text-warning font-weight-bold">
+               <%= appointment.user.full_name %>
+              </div>
+              <div class="">
+                <%= simple_form_for appointment, method: :patch, url: doctors_appointment_path(appointment) do |f| %>
+                  <%= f.input :is_confirmed, as: :hidden, input_html: {value: true } %>
+                  <%= f.submit "Confirm", class:'mb-3 mr-1 btn btn-primary btn-sm' %>
+                  <%= f.submit 'Reject', class:'mb-3 ml-1 btn btn-danger btn-sm' %>
+                <% end %>
+              </div>
             <% end %>
-          </div>
+          <% end %>
         <% end %>
-      <% end %>
-      <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

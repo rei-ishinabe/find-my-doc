@@ -1,9 +1,19 @@
 .simple-calendar {
 
   .calendar-title {
-    margin-left: 8px;
-    margin-right: 8px;
     margin-bottom: 8px;
+    font-weight: bolder;
+  }
+
+  .card-h {
+    font-weight: bold;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.3)
+  }
+
+  .calendar-heading {
+    display: flex;
+    justify-content: space-between;
   }
 
   .day {
@@ -47,9 +57,14 @@
   }
 
   .past {
-    background-color: grey;
+    // background-color: #f4f4f4;
+    background-color: #5b8e78;
+    color: #ccc;
   }
-  .future {}
+  .future {
+    background-color: #5b8e78;
+    color: #ccc;
+  }
 
   .start-date {}
 
