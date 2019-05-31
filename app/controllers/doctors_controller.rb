@@ -1,7 +1,10 @@
 class DoctorsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    if params[:specialities] || params[:address]
+    if params[:specialities].blank? and params[:address].blank?
+      @doctors = policy_scope(Doctor).sort_by { |doctor| -doctor.average_rating }
+
+    elsif params[:specialities] || params[:address]
       sql_query = "speciality ILIKE ::specialities OR syllabus ILIKE :query"
       @doctors = policy_scope(Doctor.where(speciality: params[:specialities])).sort_by { |doctor| -doctor.average_rating }
     else
