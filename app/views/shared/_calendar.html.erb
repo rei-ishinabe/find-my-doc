@@ -37,7 +37,7 @@
     <ul class="list-group list-group-flush">
       <% if Date.tomorrow.wday == 6 || Date.tomorrow.wday == 0 %>
         <% times_do.times do %>
-        <li class="list-group-item" style="background-color: rgba(0,0,0,0.004);">Busy</li>
+        <li class="list-group-item list-group-item-imp" style="background-color: rgba(0,0,0,0.004);">Busy</li>
         <% end %>
       <% else %>
         <% time = doctor.opening_hour %>
@@ -67,7 +67,7 @@
     <ul class="list-group list-group-flush">
       <% if column_day.wday == 6 || column_day.wday == 0 %>
         <% times_do.times do %>
-        <li class="list-group-item" style="background-color: rgba(0,0,0,0.004);">Busy</li>
+        <li class="list-group-item list-group-item-imp" style="background-color: rgba(0,0,0,0.004);">Busy</li>
         <% end %>
       <% else %>
         <% time = doctor.opening_hour %>
