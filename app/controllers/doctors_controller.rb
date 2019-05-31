@@ -17,7 +17,6 @@ class DoctorsController < ApplicationController
 
   def show
     @doctor = Doctor.find(params[:id])
-    @review = Review.find(@doctor.id)
     authorize @doctor
     @markers = [{
           lat: @doctor.latitude,
