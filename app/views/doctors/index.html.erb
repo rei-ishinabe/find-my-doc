@@ -16,6 +16,17 @@
               <p><i class="fas fa-phone"></i> <%= doctor.phone_number %></p>
               <p><i class="fas fa-envelope"></i> <%= doctor.email %></p>
               <p><i class="fas fa-calendar-alt"></i> <%= doctor.opening_hours %></p>
+              <p>
+                <% r = (doctor.average_rating * 2).round / 2.0 %>
+                <% r.floor.times do %>
+                <i class="fas fa-star"></i>
+                <% end %>
+                <%= '<i class="fas fa-star-half-alt"></i>'.html_safe if (r.round - r.floor) == 1 %>
+                <% (5 - r.round).times do %>
+                <i class="far fa-star"></i>
+                <% end %>
+                <%= doctor.average_rating.round(1) %> by <%= doctor.reviews.length %> patients
+              </p>
             </div>
             <div class="card card-detail mb-3 mt-3 pt-2 text-center" style="font-size: x-small;">
               <%= render 'shared/calendar', doctor: doctor, times_do: 3, short: true %>
