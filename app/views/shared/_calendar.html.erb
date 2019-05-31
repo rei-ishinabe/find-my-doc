@@ -6,10 +6,13 @@
     </div>
     <ul class="list-group list-group-flush">
       <% if Date.today.wday == 6 || Date.today.wday == 0 %>
-        <% %>
+        <% times_do.times do %>
+        <li class="list-group-item" style="color:white;">Busy</li>
+        <% end %>
       <% else %>
         <% time = (doctor.opening_hour > DateTime.now.hour ? doctor.opening_hour : DateTime.now.hour + 1) %>
-        <% times_do.times do %>
+          <% i = times_do %>
+          <% until i == 0 do %>
           <% break if time >= doctor.closing_hour %>
 
           <% hour = time.floor %>
@@ -18,9 +21,9 @@
           <% if doctor.appointments.find_by_date(input_time).nil? %>
             <li class="list-group-item"><%= link_to doctor.float_to_hour(time), doctor_appointments_path(doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
             <% time += 0.5 %>
+            <% i -= 1 %>
           <% else %>
             <% time += 0.5 %>
-            <li class="list-group-item"><%= "Busy" %></li>
           <% end %>
         <% end %>
       <% end %>
@@ -33,10 +36,13 @@
     </div>
     <ul class="list-group list-group-flush">
       <% if Date.tomorrow.wday == 6 || Date.tomorrow.wday == 0 %>
-        <% %>
+        <% times_do.times do %>
+        <li class="list-group-item" style="color:white;">Busy</li>
+        <% end %>
       <% else %>
         <% time = doctor.opening_hour %>
-        <% times_do.times do %>
+          <% i = times_do %>
+          <% until i == 0 do %>
           <% break if time >= doctor.closing_hour %>
 
           <% hour = time.floor %>
@@ -45,9 +51,9 @@
           <% if doctor.appointments.find_by_date(input_time).nil? %>
             <li class="list-group-item"><%= link_to doctor.float_to_hour(time), doctor_appointments_path(doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
             <% time += 0.5 %>
+            <% i -= 1 %>
           <% else %>
             <% time += 0.5 %>
-            <li class="list-group-item"><%= "Busy" %></li>
           <% end %>
         <% end %>
       <% end %>
@@ -60,10 +66,13 @@
     </div>
     <ul class="list-group list-group-flush">
       <% if column_day.wday == 6 || column_day.wday == 0 %>
-        <% %>
+        <% times_do.times do %>
+        <li class="list-group-item" style="color:white;">Busy</li>
+        <% end %>
       <% else %>
         <% time = doctor.opening_hour %>
-        <% times_do.times do %>
+          <% i = times_do %>
+          <% until i == 0 do %>
           <% break if time >= doctor.closing_hour %>
 
           <% hour = time.floor %>
@@ -72,9 +81,9 @@
           <% if doctor.appointments.find_by_date(input_time).nil? %>
             <li class="list-group-item"><%= link_to doctor.float_to_hour(time), doctor_appointments_path(doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
             <% time += 0.5 %>
+            <% i -= 1 %>
           <% else %>
             <% time += 0.5 %>
-            <li class="list-group-item"><%= "Busy" %></li>
           <% end %>
         <% end %>
       <% end %>
@@ -90,11 +99,13 @@
       </div>
       <ul class="list-group list-group-flush">
         <% if column_day.wday == 6 || column_day.wday == 0 %>
-          <% %>
+          <% times_do.times do %>
+          <li class="list-group-item" style="color:white;">Busy</li>
+          <% end %>
         <% else %>
           <% time = doctor.opening_hour %>
-          <%  %>
-          <% times_do.times do %>
+          <% i = times_do %>
+          <% until i == 0 do %>
             <% break if time >= doctor.closing_hour %>
 
             <% hour = time.floor %>
@@ -103,9 +114,9 @@
             <% if doctor.appointments.find_by_date(input_time).nil? %>
               <li class="list-group-item"><%= link_to doctor.float_to_hour(time), doctor_appointments_path(doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
               <% time += 0.5 %>
+              <% i -= 1 %>
             <% else %>
               <% time += 0.5 %>
-              <li class="list-group-item"><%= "Busy" %></li>
             <% end %>
           <% end %>
         <% end %>
@@ -118,10 +129,13 @@
       </div>
       <ul class="list-group list-group-flush">
         <% if column_day.wday == 6 || column_day.wday == 0 %>
-          <% %>
+          <% times_do.times do %>
+          <li class="list-group-item" style="color:white;">Busy</li>
+          <% end %>
         <% else %>
           <% time = doctor.opening_hour %>
-          <% times_do.times do %>
+          <% i = times_do %>
+          <% until i == 0 do %>
             <% break if time >= doctor.closing_hour %>
 
             <% hour = time.floor %>
@@ -130,9 +144,9 @@
             <% if doctor.appointments.find_by_date(input_time).nil? %>
               <li class="list-group-item"><%= link_to doctor.float_to_hour(time), doctor_appointments_path(doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
               <% time += 0.5 %>
+              <% i -= 1 %>
             <% else %>
               <% time += 0.5 %>
-              <li class="list-group-item"><%= "Busy" %></li>
             <% end %>
           <% end %>
         <% end %>
