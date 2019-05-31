@@ -19,7 +19,7 @@
   .day {
     padding: 4px;
     height: 120px;
-    border: 1px solid white;
+    border: 2px solid white;
   }
 
   .wday-0 {
@@ -60,12 +60,13 @@
 
   .past {
     // background-color: #f4f4f4;
-    background-color: #5b8e78;
-    color: #ccc;
+    background-color: rgba(0,0,0,0.03);
+    color: rgb(155,155,155);
   }
   .future {
-    background-color: #5b8e78;
-    color: #ccc;
+    // background-color: rgb(250,250,250);
+    background-color: rgb(245,245,245);
+    color: rgb(50,50,50);
   }
 
   .start-date {}
