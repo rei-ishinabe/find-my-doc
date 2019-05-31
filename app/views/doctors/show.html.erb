@@ -4,57 +4,43 @@
   <% end %>
 </div>
 
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-12">
-      <div class="row no-gutters">
-        <div class="col-12 col-md-6 card-detail m-3 d-flex justify-content-between">
+<div class="container mt-5" style='position:relative;'>
+  <div class="row justify-content-between">
 
-          <div class="" style="height: 100%; position: relative;" >
-         <%= cl_image_tag(@doctor.photo,
-      width: 220, height: 300, crop: :thumb, gravity: :face, class: "img-fluid" ) %>
-            <div class="card-shadow">
-            </div>
+    <div class="col-7 mx-0">
+      <div class="card-detail mt-3" style='height: 320px;'>
+        <div class="" style="height: 100%; position: relative;" >
+          <%= cl_image_tag(@doctor.photo,
+              width: 220, height: 300, crop: :thumb, gravity: :face, class: "img-fluid" ) %>
+          <div class="card-shadow">
           </div>
+        </div>
+        <div class="" style="width: 330px; opacity: 0.7;">
+          <div class="card-body">
+            <h4 class="card-title mb-1"><%= @doctor.full_name %></h4>
+            <h5 class="card-text mb-3"><small class="text-muted"><%= @doctor.speciality %></small></h5>
+            <p><i class="fas fa-map-marked-alt"></i> <%= @doctor.address %></p>
+            <p class="card-text"><i class="fas fa-phone"></i> <%= @doctor.phone_number %></p>
+            <p class="card-text"><i class="fas fa-envelope"></i> <%=  @doctor.email %></p>
 
-      <div class="" style="width: 330px">
-        <div class="card-body">
-          <h4 class="card-title mb-1"><%= @doctor.full_name %></h4>
-          <h5 class="card-text mb-3"><small class="text-muted"><%= @doctor.speciality %></small></h5>
-          <p><i class="fas fa-map-marked-alt"></i> <%= @doctor.address %></p>
-          <p class="card-text"><i class="fas fa-phone"></i> <%= @doctor.phone_number %></p>
-          <p class="card-text"><i class="fas fa-envelope"></i> <%=  @doctor.email %></p>
-
-          <% r = (@doctor.average_rating * 2).round / 2.0 %>
-          <p class="card-text">
-            <% r.floor.times do %>
-              <i class="fas fa-star"></i>
-            <% end %>
-            <%= '<i class="fas fa-star-half-alt"></i>'.html_safe if (r.round - r.floor) == 1 %>
-            <% (5 - r.round).times do %>
-              <i class="far fa-star"></i>
-            <% end %>
-            <%= @doctor.average_rating.round(1) %> by <%= @doctor.reviews.length %> patients
-          </p>
+            <% r = (@doctor.average_rating * 2).round / 2.0 %>
+            <p class="card-text">
+              <% r.floor.times do %>
+                <i class="fas fa-star"></i>
+              <% end %>
+              <%= '<i class="fas fa-star-half-alt"></i>'.html_safe if (r.round - r.floor) == 1 %>
+              <% (5 - r.round).times do %>
+                <i class="far fa-star"></i>
+              <% end %>
+              <%= @doctor.average_rating.round(1) %> by <%= @doctor.reviews.length %> patients
+            </p>
+          </div>
         </div>
       </div>
-    </div>
-
-
-
-     <div class="card card-detail col-md-5 mb-3 mt-3 ml-3 pt-2 px-2 ml-1 text-center" style="font-size: x-small;">
-       <%= render 'shared/calendar', doctor: @doctor, times_do: 6, short: false %>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row">
-    <div class="col-12">
-      <div class="card-detail pt-3">
+      <div class="card-detail mt-3 pt-3" style='opacity: 0.7;'>
         <ul class="pl-3">
           <% @doctor.reviews.each do |review| %>
-            <li><% review.stars.times do %>
+            <li class='mb-1'><% review.stars.times do %>
               <i class="fas fa-star ml-0"></i>
               <% end %>
               <% (5 - review.stars).times do %>
@@ -62,14 +48,14 @@
               <% end %>
               <span class="ml-3 font-italic"><%= review.content %></span><span style="font-size: 12px; color:grey;"> by <%= review.user.full_name %></span></li>
           <% end %>
-      </ul>
+        </ul>
       </div>
     </div>
-  </div>
-</div>
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-12 ">
+
+    <div class="col-5 mx-0">
+      <div class="card card-detail mb-3 mt-3 pt-2 px-2 text-center" style="font-size: x-small;">
+       <%= render 'shared/calendar', doctor: @doctor, times_do: 6, short: false %>
+      </div>
       <div
         id="map"
         style="width: 100%;
@@ -78,7 +64,8 @@
         box-shadow: 0 0 15px rgba(0,0,0,0.2);"
         data-markers="<%= @markers.to_json %>"
         data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-      ></div>
+      >
+      </div>
     </div>
   </div>
 </div>
