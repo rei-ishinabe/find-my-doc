@@ -1,124 +1,23 @@
 <div class="container mt-5">
-  <div class="row justify-content-between">
-    <div class="col-8">
-      <h1>Search result for doctors</h1>
-      <% if @doctors.nil? %>
-      <div class="card-product d-flex justify-content-center align-center">
-        <h4>No doctors with given parameters</h4>
-      </div>
-      <% else %>
-      <%  @doctors.each do |doctor| %>
-      <div class="card-product">
-        <img src="<%= doctor.photo %>">
-        <div class="card-product-infos">
-          <h2><%= link_to "#{doctor.full_name} - #{doctor.speciality.capitalize}" , doctor_path(doctor)  %></h2>
-          <p><i class="fas fa-map-marked-alt"></i> <%= doctor.address %></p>
-          <p><i class="fas fa-phone"></i> <%= doctor.phone_number %></p>
-          <p><i class="fas fa-envelope"></i> <%= doctor.email %></p>
-          <p><i class="fas fa-calendar-alt"></i> <%= doctor.opening_hours %></p>
-        </div>
+  <h1>Search result for doctors</h1>
+  <% if @doctors.nil? %>
+  <div class="card-product d-flex justify-content-center align-center">
+    <h4>No doctors with given parameters</h4>
+  </div>
+  <% else %>
+  <%  @doctors.each do |doctor| %>
+  <div class="card-product">
+    <img src="<%= doctor.photo %>">
+    <div class="card-product-infos">
+      <h2><%= link_to "#{doctor.full_name} - #{doctor.speciality.capitalize}" , doctor_path(doctor)  %></h2>
+      <p><i class="fas fa-map-marked-alt"></i> <%= doctor.address %></p>
+      <p><i class="fas fa-phone"></i> <%= doctor.phone_number %></p>
+      <p><i class="fas fa-envelope"></i> <%= doctor.email %></p>
+      <p><i class="fas fa-calendar-alt"></i> <%= doctor.opening_hours %></p>
+    </div>
 
-        <div class="card card-detail text-center" style="font-size: x-small;">
-          <div class="d-flex justify-content-center">
-            <div class="card" style="width: 5.7rem">
-              <div class="card-header">
-                Today
-              </div>
-              <ul class="list-group list-group-flush">
-                <% if Date.today.wday == 6 || Date.today.wday == 0 %>
-                  <% %>
-                <% else %>
-                  <% time = (doctor.opening_hour > DateTime.now.hour ? doctor.opening_hour : DateTime.now.hour + 1) %>
-                  <% 3.times do %>
-                    <% break if time >= doctor.closing_hour %>
-
-                    <% hour = time.floor %>
-                    <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
-                    <% input_time = Time.current.change(month: Date.today.month, day: Date.today.day, hour: hour, min: minute) %>
-                    <% if doctor.appointments.find_by_date(input_time).nil? %>
-                      <li class="list-group-item"><%= link_to doctor.float_to_hour(time), doctor_appointments_path(doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
-                      <% time += 0.5 %>
-                    <% else %>
-                      <% time += 0.5 %>
-                       <li class="list-group-item"><%= "Busy" %></li>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              </ul>
-            </div>
-
-            <div class="card" style="width: 5.7rem; height: 100%">
-              <div class="card-header">
-                <%= "Tomorrow" %>
-              </div>
-              <ul class="list-group list-group-flush">
-                <% if Date.tomorrow.wday == 6 || Date.tomorrow.wday == 0 %>
-                  <% %>
-                <% else %>
-                  <% time = doctor.opening_hour %>
-                  <% 3.times do %>
-                    <% break if time >= doctor.closing_hour %>
-
-                    <% hour = time.floor %>
-                    <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
-                    <% input_time = Time.current.change(month: Date.tomorrow.month, day: Date.tomorrow.day, hour: hour, min: minute) %>
-                    <% if doctor.appointments.find_by_date(input_time).nil? %>
-                      <li class="list-group-item"><%= link_to doctor.float_to_hour(time), doctor_appointments_path(doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
-                      <% time += 0.5 %>
-                    <% else %>
-                      <% time += 0.5 %>
-                       <li class="list-group-item"><%= "Busy" %></li>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              </ul>
-            </div>
-
-            <div class="card" style="width: 5.7rem; height: 100%">
-              <div class="card-header">
-                <% column_day = Date.current + 2 %>
-                <%= column_day.strftime("%A") %>
-              </div>
-              <ul class="list-group list-group-flush">
-                <% if column_day.wday == 6 || column_day.wday == 0 %>
-                  <% %>
-                <% else %>
-                  <% time = doctor.opening_hour %>
-                  <% 3.times do %>
-                    <% break if time >= doctor.closing_hour %>
-
-                    <% hour = time.floor %>
-                    <% minute = time * 10 % 10 == 0 ? 0 : 30 %>
-                    <% input_time = Time.current.change(month: column_day.month, day: column_day.day, hour: hour, min: minute) %>
-                    <% if doctor.appointments.find_by_date(input_time).nil? %>
-                      <li class="list-group-item"><%= link_to doctor.float_to_hour(time), doctor_appointments_path(doctor, time: input_time ), method: :post, data: { confirm: "Book appointment for #{doctor.full_name} on #{input_time.strftime("%F at %H:%M")}" } %></li>
-                      <% time += 0.5 %>
-                    <% else %>
-                      <% time += 0.5 %>
-                       <li class="list-group-item"><%= "Busy" %></li>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        </div>
-        </div>
-        <% end %> <!-- ends the doctors.each -->
-        <% end %> <!-- ends the if statement -->
-      </div>
-        <div class="col-4 mt-5 pt-2 rounded">
-        <div
-          id="map"
-          style="width: 100%;
-          height: 600px;
-          box-shadow: 0 0 15px rgba(0,0,0,0.2);
-          border-radius: 8px;"
-          data-markers="<%= @markers.to_json %>"
-          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"
-        >
-        </div>
-      </div>
+    <div class="card card-detail mb-3 mt-3 pt-2 text-center" style="font-size: x-small;">
+      <%= render 'shared/calendar', doctor: doctor, times_do: 3, short: true %>
     </div>
   </div>
 </div>
