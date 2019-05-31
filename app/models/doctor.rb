@@ -39,4 +39,16 @@ class Doctor < ApplicationRecord
   def self.specialities_list
     SPECIALITIES
   end
+
+  def average_rating
+    return 0 if reviews.empty?
+
+    sum = 0.0
+
+    reviews.each do |review|
+      sum += review[:stars]
+    end
+
+    sum / reviews.count
+  end
 end

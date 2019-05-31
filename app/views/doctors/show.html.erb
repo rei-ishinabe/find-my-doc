@@ -22,6 +22,17 @@
           <h5 class="card-text mb-3"><small class="text-muted"><%= @doctor.speciality %></small></h5>
           <p class="card-text"><i class="fas fa-envelope"></i> <%=  @doctor.email %></p>
           <p class="card-text"><i class="fas fa-phone"></i> <%= @doctor.phone_number %></p>
+          <% r = (@doctor.average_rating * 2).round / 2.0 %>
+          <p class="card-text">
+            <% r.floor.times do %>
+              <i class="fas fa-star"></i>
+            <% end %>
+            <%= '<i class="fas fa-star-half-alt"></i>'.html_safe if (r.round - r.floor) == 1 %>
+            <% (5 - r.round).times do %>
+              <i class="far fa-star"></i>
+            <% end %>
+            <%= @doctor.average_rating.round(1) %> by <%= @doctor.reviews.length %> patients.
+          </p>
         </div>
       </div>
     </div>
